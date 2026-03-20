@@ -459,29 +459,38 @@ function initMic(){
   const has = 'webkitSpeechRecognition' in window || 'SpeechRecognition' in window;
   if(!has){ S.micAvail = false; document.getElementById('mic-status').textContent = 'このブラウザは音声非対応'; return; }
   S.micAvail = true;
+}
+
+function createRecognition(){
   const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-  S.recognition = new SR();
-  S.recognition.lang = 'ja-JP';
-  S.recognition.continuous = true;
-  S.recognition.interimResults = true;
-  S.recognition.onresult = e => {
-    let fullText = '';
+  const r = new SR();
+  r.lang = 'ja-JP';
+  r.continuous = false;  // 1発話ごとに完結
+  r.interimResults = true;
+  r.onresult = e => {
+    let final = '';
     let interim = '';
-    // 全結果を最初から組み立て直す（重複防止）
     for(let i = 0; i < e.results.length; i++){
-      if(e.results[i].isFinal){
-        fullText += e.results[i][0].transcript;
-      } else {
-        interim += e.results[i][0].transcript;
-      }
+      if(e.results[i].isFinal) final += e.results[i][0].transcript;
+      else interim += e.results[i][0].transcript;
     }
-    S.transcript = fullText;
-    const display = fullText + interim;
+    if(final) S.transcript += final;
+    const display = S.transcript + interim;
     document.getElementById('transcript').textContent = display || '（認識中...）';
     document.getElementById('text-input').value = display;
   };
-  S.recognition.onerror = () => { stopMic(); };
-  S.recognition.onend = () => { if(S.recording){ S.recognition.start(); } };
+  r.onerror = e => {
+    if(e.error === 'no-speech' || e.error === 'aborted') return;
+    stopMic();
+  };
+  r.onend = () => {
+    // 録音中なら新しいインスタンスで再開（Androidの制限対応）
+    if(S.recording){
+      S.recognition = createRecognition();
+      try{ S.recognition.start(); } catch(err){}
+    }
+  };
+  return r;
 }
 
 function toggleMic(){
@@ -497,8 +506,9 @@ function startMic(){
   S.transcript='';
   document.getElementById('transcript').textContent='（認識中...）';
   document.getElementById('text-input').value='';
-  S.recognition.start();
   S.recording=true;
+  S.recognition = createRecognition();
+  try{ S.recognition.start(); } catch(err){ stopMic(); return; }
   document.getElementById('mic-btn').classList.add('rec');
   document.getElementById('mic-btn').textContent='⏹';
   document.getElementById('mic-status').textContent='録音中...';
