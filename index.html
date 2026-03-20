@@ -465,17 +465,20 @@ function initMic(){
   S.recognition.continuous = true;
   S.recognition.interimResults = true;
   S.recognition.onresult = e => {
-    resetSilenceTimer();
-    let final = '', interim = '';
-    for(let i = e.resultIndex; i < e.results.length; i++){
-      if(e.results[i].isFinal) final += e.results[i][0].transcript;
-      else interim += e.results[i][0].transcript;
+    let fullText = '';
+    let interim = '';
+    // 全結果を最初から組み立て直す（重複防止）
+    for(let i = 0; i < e.results.length; i++){
+      if(e.results[i].isFinal){
+        fullText += e.results[i][0].transcript;
+      } else {
+        interim += e.results[i][0].transcript;
+      }
     }
-    S.transcript += final;
-    const display = S.transcript + interim;
+    S.transcript = fullText;
+    const display = fullText + interim;
     document.getElementById('transcript').textContent = display || '（認識中...）';
     document.getElementById('text-input').value = display;
-    if(final) resetSilenceTimer();
   };
   S.recognition.onerror = () => { stopMic(); };
   S.recognition.onend = () => { if(S.recording){ S.recognition.start(); } };
