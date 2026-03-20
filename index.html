@@ -222,7 +222,7 @@ textarea:focus{border-color:var(--accent)}
 
     <div class="answer-area" id="answer-area" style="display:none">
       <div class="a-label">あなたの回答</div>
-      <div class="mic-wrap" id="mic-wrap" style="display:none">
+      <div class="mic-wrap" id="mic-wrap">
         <button class="mic-btn" id="mic-btn" onclick="toggleMic()">🎤</button>
         <div class="mic-status" id="mic-status">タップして録音開始</div>
         <div class="transcript" id="transcript">（ここに音声認識の内容が表示されます）</div>
@@ -457,7 +457,7 @@ function speak(text, onEnd){
 // ===== MIC =====
 function initMic(){
   const has = 'webkitSpeechRecognition' in window || 'SpeechRecognition' in window;
-  if(!has){ S.micAvail = false; document.getElementById('mic-wrap').style.display = 'none'; document.getElementById('no-mic-note').style.display = 'block'; return; }
+  if(!has){ S.micAvail = false; document.getElementById('mic-status').textContent = 'このブラウザは音声非対応'; return; }
   S.micAvail = true;
   const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
   S.recognition = new SR();
@@ -482,7 +482,10 @@ function initMic(){
 }
 
 function toggleMic(){
-  if(!S.micAvail) return;
+  if(!S.micAvail){
+    document.getElementById('mic-status').textContent = '音声認識非対応ブラウザです';
+    return;
+  }
   if(S.recording){ stopMic(); }
   else { startMic(); }
 }
