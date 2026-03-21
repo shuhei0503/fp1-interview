@@ -451,22 +451,31 @@ function speak(text, onEnd){
     }
     S.utterance = u;
     document.getElementById('speaking-dots').style.display = 'flex';
-    u.onend = () => {
+    let endFired = false;
+    const endOnce = () => {
+      if(endFired) return;
+      endFired = true;
       document.getElementById('speaking-dots').style.display = 'none';
       if(onEnd) onEnd();
     };
-    u.onerror = () => {
-      document.getElementById('speaking-dots').style.display = 'none';
-      if(onEnd) onEnd();
-    };
+    // 音声長さに応じたタイムアウト（最大30秒）
+    const timeout = setTimeout(endOnce, Math.max(3000, text.length * 200));
+    u.onend = () => { clearTimeout(timeout); endOnce(); };
+    u.onerror = () => { clearTimeout(timeout); endOnce(); };
     synth.speak(u);
     S.speaking = true;
   };
-  // 音声リストが未ロードの場合は待つ
+  // 音声リストが未ロードの場合は待つ（タイムアウト付き）
   if(synth.getVoices().length > 0){
     doSpeak();
   } else {
-    synth.onvoiceschanged = () => { synth.onvoiceschanged = null; doSpeak(); };
+    let fired = false;
+    const fallback = setTimeout(() => {
+      if(!fired){ fired = true; doSpeak(); }
+    }, 500);
+    synth.onvoiceschanged = () => {
+      if(!fired){ fired = true; clearTimeout(fallback); synth.onvoiceschanged = null; doSpeak(); }
+    };
   }
 }
 
