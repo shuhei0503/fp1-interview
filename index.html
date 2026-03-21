@@ -207,7 +207,7 @@ textarea:focus{border-color:var(--accent)}
     <button onclick="repeatQuestion()" style="flex:1;background:transparent;border:1px solid var(--border);border-radius:var(--radius);color:var(--dim);font-family:'Noto Sans JP',sans-serif;font-size:12px;padding:8px;cursor:pointer;">🔁 もう一度</button>
     <button onclick="confirmRestart()" style="flex:1;background:transparent;border:1px solid var(--border);border-radius:var(--radius);color:var(--dim);font-family:'Noto Sans JP',sans-serif;font-size:12px;padding:8px;cursor:pointer;">やり直す</button>
   </div>
-  <div id="iv-voice-bar" style="display:none;align-items:center;gap:8px;padding:8px 20px;border-bottom:1px solid var(--border);background:var(--surface2)">
+  <div id="iv-voice-bar" style="display:flex;align-items:center;gap:8px;padding:8px 20px;border-bottom:1px solid var(--border);background:var(--surface2)">
     <span style="font-size:11px;color:var(--muted)">音声</span>
     <div class="sel-btn" id="iv-voice-m" onclick="setVoiceGenderLive('m')" style="padding:5px 10px;font-size:12px;flex:0">男</div>
     <div class="sel-btn active" id="iv-voice-f" onclick="setVoiceGenderLive('f')" style="padding:5px 10px;font-size:12px;flex:0">女</div>
@@ -221,7 +221,7 @@ textarea:focus{border-color:var(--accent)}
     <div class="q-block" id="q-block">
       <div class="q-label">面接官</div>
       <div class="q-text" id="q-text"></div>
-      <div class="dots" id="speaking-dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+      <div class="dots" id="speaking-dots" style="display:none"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
     </div>
 
     <div class="answer-area" id="answer-area" style="display:none">
@@ -570,6 +570,10 @@ function startInterview(){
   startTimer();
 
   // 挨拶待ち
+  // 入力モードに応じてUIを切替
+  const micWrap = document.getElementById('mic-wrap');
+  if(micWrap) micWrap.style.display = S.inputMode === 'voice' ? 'flex' : 'none';
+
   showQuestion('よろしくお願いします。まず自己紹介をお願いします。', true);
 }
 
@@ -627,7 +631,8 @@ function forceLastQ(){
 function showQuestion(text, isGreeting=false){
   S.currentQ = text;
   document.getElementById('q-text').textContent = text;
-  document.getElementById('speaking-dots').style.display = 'flex';
+  // 音声モードのみ読み上げ中ドットを表示
+  document.getElementById('speaking-dots').style.display = S.inputMode === 'voice' ? 'flex' : 'none';
   document.getElementById('answer-area').style.display = 'none';
   document.getElementById('thinking').style.display = 'none';
   if(document.getElementById('text-input')) document.getElementById('text-input').value = '';
@@ -637,6 +642,10 @@ function showQuestion(text, isGreeting=false){
   speak(text, () => {
     document.getElementById('answer-area').style.display = 'block';
     window.scrollTo({top: document.getElementById('q-block').offsetTop - 70, behavior:'smooth'});
+    // 音声入力モードの場合、マイクを自動オン
+    if(S.inputMode === 'voice' && S.micAvail && !S.recording){
+      setTimeout(() => startMic(), 300);
+    }
   });
 }
 
