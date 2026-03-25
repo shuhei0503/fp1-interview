@@ -162,22 +162,13 @@ textarea:focus{border-color:var(--accent)}
   <div class="section" style="padding-top:0">
     <div class="section-title">オプション</div>
     <div class="card">
-      <div class="toggle-row" style="margin-bottom:14px">
-        <span class="toggle-label">入力方式</span>
-        <div class="select-grid" style="margin:0;width:160px">
-          <div class="sel-btn active" id="mode-text" onclick="setInputMode('text')" style="padding:8px 4px;font-size:12px">テキスト</div>
-          <div class="sel-btn" id="mode-voice" onclick="setInputMode('voice')" style="padding:8px 4px;font-size:12px">音声</div>
+      <div class="toggle-row" style="margin-bottom:10px">
+        <span class="toggle-label" style="font-size:12px;color:var(--dim)">音声</span>
+        <div class="select-grid" style="margin:0;width:120px">
+          <div class="sel-btn" id="voice-m" onclick="setVoiceGender('m')" style="padding:8px 4px;font-size:12px">男性</div>
+          <div class="sel-btn active" id="voice-f" onclick="setVoiceGender('f')" style="padding:8px 4px;font-size:12px">女性</div>
         </div>
       </div>
-      <div id="voice-options" style="display:none">
-        <div style="height:1px;background:var(--border);margin-bottom:14px"></div>
-        <div class="toggle-row" style="margin-bottom:10px">
-          <span class="toggle-label" style="font-size:12px;color:var(--dim)">音声</span>
-          <div class="select-grid" style="margin:0;width:120px">
-            <div class="sel-btn" id="voice-m" onclick="setVoiceGender('m')" style="padding:8px 4px;font-size:12px">男性</div>
-            <div class="sel-btn active" id="voice-f" onclick="setVoiceGender('f')" style="padding:8px 4px;font-size:12px">女性</div>
-          </div>
-        </div>
       <div class="range-row">
         <label>速さ</label>
         <input type="range" min="0.8" max="1.5" step="0.05" value="1.0" id="rate-slider" oninput="document.getElementById('rate-val').textContent=parseFloat(this.value).toFixed(2)">
@@ -289,7 +280,7 @@ const LAST_Q = {
 // ===== STATE =====
 let S = {
   mode:'part', part:1, selectedExam:null,
-  voiceGender:'f', rate:1.0, inputMode:'text',
+  voiceGender:'f', rate:1.0,
   timerInterval:null, secs:720,
   qIdx:0, fqIdx:-1,
   currentQ:'', qaLog:[],
@@ -384,13 +375,6 @@ function toggleExtra(){
   document.getElementById('toggle-extra').classList.toggle('on', S.extraQ);
 }
 
-function setInputMode(mode){
-  S.inputMode = mode;
-  document.getElementById('mode-text').classList.toggle('active', mode==='text');
-  document.getElementById('mode-voice').classList.toggle('active', mode==='voice');
-  document.getElementById('voice-options').style.display = mode==='voice' ? 'block' : 'none';
-}
-
 function setVoiceGender(g){
   S.voiceGender = g;
   document.getElementById('voice-m').classList.toggle('active', g==='m');
@@ -421,11 +405,6 @@ if(synth.onvoiceschanged !== undefined) synth.onvoiceschanged = loadVoices;
 loadVoices();
 
 function speak(text, onEnd){
-  // テキスト入力モードの場合は音声なし
-  if(S.inputMode === 'text'){
-    if(onEnd) onEnd();
-    return;
-  }
   synth.cancel();
   const doSpeak = () => {
     const u = new SpeechSynthesisUtterance(text);
@@ -579,10 +558,6 @@ function startInterview(){
   startTimer();
 
   // 挨拶待ち
-  // 入力モードに応じてUIを切替
-  const micWrap = document.getElementById('mic-wrap');
-  if(micWrap) micWrap.style.display = S.inputMode === 'voice' ? 'flex' : 'none';
-
   showQuestion('よろしくお願いします。まず自己紹介をお願いします。', true);
 }
 
@@ -641,7 +616,7 @@ function showQuestion(text, isGreeting=false){
   S.currentQ = text;
   document.getElementById('q-text').textContent = text;
   // 音声モードのみ読み上げ中ドットを表示
-  document.getElementById('speaking-dots').style.display = S.inputMode === 'voice' ? 'flex' : 'none';
+  document.getElementById('speaking-dots').style.display = 'none';
   document.getElementById('answer-area').style.display = 'none';
   document.getElementById('thinking').style.display = 'none';
   if(document.getElementById('text-input')) document.getElementById('text-input').value = '';
@@ -651,10 +626,7 @@ function showQuestion(text, isGreeting=false){
   speak(text, () => {
     document.getElementById('answer-area').style.display = 'block';
     window.scrollTo({top: document.getElementById('q-block').offsetTop - 70, behavior:'smooth'});
-    // 音声入力モードの場合、マイクを自動オン
-    if(S.inputMode === 'voice' && S.micAvail && !S.recording){
-      setTimeout(() => startMic(), 300);
-    }
+
   });
 }
 
