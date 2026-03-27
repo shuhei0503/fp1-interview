@@ -1,39 +1,784 @@
-<!-- 既存のEXAM_DATAに以下を追加してください -->
-<script>
-// 追加データ
-const NEW_EXAMS = [
-  {
-    "id": "2025-09-28-part2",
-    "title": "2025年度第2回 Part2（2025年9月28日）",
-    "setsurei": "Ａさん（65歳）は、妻ＢさんとＭ市内の自宅マンションで暮らしており、子どもはいない。現在、Ａさんは大手物流会社に勤務しているが、３カ月後に退職予定である。\n\nＡさんは、５年前に亡くなった父親から、都心ターミナルＮ駅徒歩５分の甲マンションの一室（５階に所在、専有面積50㎡、15万円で賃貸中）を相続で譲り受けている。母親は７年前に亡くなっており、実家は両親と暮らしていた兄Ｃさん（67歳）が相続している。\n\n〖甲マンション（甲土地）全体の概要〗\n\n敷地面積690㎡、延床面積2,270㎡、1972年築（築後約53年）、鉄筋コンクリート造８階建て、総戸数40戸、40㎡から60㎡（１ＬＤＫ、２ＬＤＫ主体）の分譲マンション。甲マンションに居住している区分所有者は２人だけで、他の所有者は賃貸物件として運用しているか自用の事務所として利用している。\n\nＡさんは、４年前から甲マンション管理組合の理事を引き受けていたが、管理組合の理事長が昨年体調を崩してしまい、理事長職を引き継いだばかりである。\n\n甲マンションでは、２カ月前に３階の部屋で水漏れ事故が発生した。このような水漏れ事故が過去にも２件発生しており、給排水管更新工事を行う必要があると管理会社から言われている。また、エレベーターについても管理している業者から数年内には更新したほうがよいと言われている（概算見積り3,000万円）。\n\n昨年、大通りに面した北側隣接のガソリンスタンド（敷地面積420㎡）が閉鎖し、大手マンションデベロッパーのＸ社がその跡地である乙土地を今年購入している。先日、Ｘ社の担当者から連絡があり、Ａさんと数人の理事が面談した。その際、担当者から、「甲マンションの敷地と建物を総額16億円（１戸平均で4,000万円）で購入させてほしいと思っている。直ぐの事業化は検討していないが、組合として検討していただけないか」との提案を受けた。\n\nＡさん含め他の理事もＸ社の提案を魅力的なものと考えているが、昨年、５階の住戸（専有面積50㎡）が2,000万円で取引されており、なぜＸ社が老朽化している甲マンションをそのような条件で購入したいのか、腑に落ちていない。また、Ｘ社の提案により甲マンションを売却する場合、所有者全員の同意を得なければいけないのか、よくわからないでいる。\n\nとはいえ、建物老朽化には抗えず、今後甲マンションをＸ社に売却するのか、あるいは建替えをするのかが、管理組合の主要な議題になっている。なお、ニュースなどで、マンションの建替えが容易ではないということを聞いたことはあるが、具体的に何が障壁となるのかはわかっていない。\n\nこのような状況のもと、ＦＰであるあなたに相談があった。",
-    "questions": [
-      {
-        "main": "Aさんに対して、最適なアドバイスをするためには、示された情報のほかに、どのような情報が必要ですか？",
-        "followups": [
-          "①Aさんから直接聞いて確認する情報は、どのようなことですか？",
-          "②FPであるあなた自身が調べて確認する情報は、どのようなことですか？"
-        ],
-        "model": "（省略：元データそのまま使用）"
-      }
-    ]
-  },
-  {
-    "id": "2025-10-04-part1",
-    "title": "2025年度第2回 Part1（2025年10月4日）",
-    "setsurei": "（省略：元データそのまま使用）",
-    "questions": [
-      {
-        "main": "Aさんの相談内容と問題点について項目だけで構いませんので全てあげてください。",
-        "followups": [
-          "それでは、今あげた問題点を解決するためにどのような提案・方策が考えられますか？",
-          "法的な相続権がないＤさんに財産を遺す方法は、どのような方法が考えられますか？"
-        ],
-        "model": "（省略：元データそのまま使用）"
-      }
-    ]
-  }
-];
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>FP1級 模擬面接</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&family=Noto+Sans+JP:wght@300;400;500&display=swap');
+:root {
+  --bg:#0c0c10;--surface:#13131a;--surface2:#1a1a24;--border:#252535;
+  --accent:#b8965a;--accent2:#6aaec0;--text:#e2ddd4;--dim:#777888;--muted:#444455;
+  --red:#d95555;--green:#5ec49a;--radius:8px;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow-x:hidden}
+body{background:var(--bg);color:var(--text);font-family:'Noto Sans JP',sans-serif;font-weight:300;font-size:15px;line-height:1.7}
+.screen{display:none;min-height:100vh;padding:0 0 80px}
+.screen.active{display:block}
 
-// 既存EXAM_DATAに追加
-EXAM_DATA.exams = EXAM_DATA.exams.concat(NEW_EXAMS);
+/* HEADER */
+.top-bar{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;position:sticky;top:0;background:var(--bg);z-index:100}
+.badge{font-size:10px;letter-spacing:2px;color:var(--accent);border:1px solid var(--accent);padding:3px 8px}
+.top-bar h1{font-family:'Noto Serif JP',serif;font-size:16px;font-weight:300;letter-spacing:2px}
+
+/* TOP SCREEN */
+.section{padding:20px}
+.section-title{font-size:10px;letter-spacing:3px;color:var(--accent);margin-bottom:14px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:10px}
+.select-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.sel-btn{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:14px 10px;text-align:center;cursor:pointer;transition:all .2s;font-family:'Noto Sans JP',sans-serif;font-size:13px;color:var(--dim)}
+.sel-btn.active{border-color:var(--accent);color:var(--accent);background:rgba(184,150,90,.08)}
+.sel-btn:active{transform:scale(.97)}
+.exam-list{max-height:240px;overflow-y:auto}
+.exam-item{padding:12px 14px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s;font-size:13px}
+.exam-item:last-child{border-bottom:none}
+.exam-item:active{background:var(--surface2)}
+.exam-item .badge2{font-size:10px;color:var(--accent2);margin-right:6px}
+input[type=text]{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-family:'Noto Sans JP',sans-serif;font-size:14px;padding:12px 14px;outline:none;transition:border-color .2s}
+input[type=text]:focus{border-color:var(--accent)}
+input[type=text]::placeholder{color:var(--muted)}
+.range-row{display:flex;align-items:center;gap:10px;margin-top:10px}
+.range-row label{font-size:12px;color:var(--dim);min-width:32px}
+input[type=range]{flex:1;accent-color:var(--accent);height:4px}
+.range-val{font-size:12px;min-width:28px;text-align:right;color:var(--text)}
+.toggle-row{display:flex;align-items:center;justify-content:space-between;padding:4px 0}
+.toggle-label{font-size:13px;color:var(--text)}
+.toggle{width:44px;height:24px;background:var(--border);border-radius:12px;position:relative;cursor:pointer;transition:background .2s}
+.toggle.on{background:var(--accent)}
+.toggle::after{content:'';position:absolute;width:18px;height:18px;background:#fff;border-radius:50%;top:3px;left:3px;transition:transform .2s}
+.toggle.on::after{transform:translateX(20px)}
+.start-btn{width:100%;background:var(--accent);color:var(--bg);border:none;border-radius:var(--radius);padding:16px;font-family:'Noto Sans JP',sans-serif;font-size:15px;letter-spacing:3px;cursor:pointer;margin-top:6px;transition:opacity .2s}
+.start-btn:active{opacity:.8}
+.start-btn:disabled{opacity:.4;cursor:default}
+.selected-info{background:rgba(184,150,90,.1);border:1px solid rgba(184,150,90,.3);border-radius:var(--radius);padding:12px 14px;font-size:13px;color:var(--accent);margin-bottom:10px;display:none}
+
+/* INTERVIEW SCREEN */
+.interview-header{padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:var(--bg);z-index:100}
+.phase-label{font-size:10px;letter-spacing:2px;color:var(--accent2)}
+.timer{font-family:'Noto Serif JP',serif;font-size:28px;letter-spacing:2px}
+.timer.urgent{color:var(--red)}
+.timer-bar{height:2px;background:var(--border)}
+.timer-fill{height:100%;background:var(--accent2);transition:width 1s linear}
+.timer-fill.urgent{background:var(--red)}
+.interview-body{padding:20px}
+.q-block{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent2);border-radius:0 var(--radius) var(--radius) 0;padding:18px;margin-bottom:16px}
+.q-label{font-size:10px;letter-spacing:2px;color:var(--accent2);margin-bottom:10px}
+.q-text{font-family:'Noto Serif JP',serif;font-size:15px;line-height:1.9}
+.dots{display:flex;gap:4px;margin-top:10px}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--accent2);animation:blink .8s infinite}
+.dot:nth-child(2){animation-delay:.15s}
+.dot:nth-child(3){animation-delay:.3s}
+@keyframes blink{0%,100%{opacity:.2;transform:scale(.8)}50%{opacity:1;transform:scale(1.1)}}
+.history{margin-bottom:16px}
+.hist-q{font-size:12px;color:var(--muted);padding:8px 12px;border-left:2px solid var(--muted);margin-bottom:4px}
+.hist-a{font-size:13px;color:var(--dim);padding:8px 12px;border-left:2px solid var(--accent);margin-bottom:12px}
+.answer-area{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px}
+.a-label{font-size:10px;letter-spacing:2px;color:var(--accent);margin-bottom:12px}
+.mic-wrap{display:flex;flex-direction:column;align-items:center;gap:10px;padding:16px 0;border-bottom:1px solid var(--border);margin-bottom:12px}
+.mic-btn{width:60px;height:60px;border-radius:50%;border:2px solid var(--border);background:var(--surface2);font-size:22px;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center}
+.mic-btn.rec{border-color:var(--red);background:rgba(217,85,85,.12);animation:mic-pulse 1.5s infinite}
+@keyframes mic-pulse{0%,100%{box-shadow:0 0 0 0 rgba(217,85,85,.3)}50%{box-shadow:0 0 0 12px rgba(217,85,85,0)}}
+.mic-status{font-size:12px;color:var(--dim);letter-spacing:1px}
+.transcript{font-size:13px;color:var(--dim);font-style:italic;min-height:40px;padding:8px;background:var(--surface2);border-radius:4px;margin-top:6px;width:100%}
+textarea{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-family:'Noto Sans JP',sans-serif;font-size:14px;padding:12px;resize:vertical;min-height:100px;outline:none;transition:border-color .2s}
+textarea:focus{border-color:var(--accent)}
+.btn-row{display:flex;gap:10px;margin-top:12px;justify-content:flex-end}
+.btn{padding:11px 22px;border-radius:var(--radius);font-family:'Noto Sans JP',sans-serif;font-size:13px;letter-spacing:1px;cursor:pointer;border:none;transition:all .2s}
+.btn-primary{background:var(--accent);color:var(--bg)}
+.btn-primary:active{opacity:.8}
+.btn-secondary{background:transparent;color:var(--dim);border:1px solid var(--border)}
+.btn-secondary:active{background:var(--surface2)}
+.thinking{display:flex;align-items:center;gap:10px;padding:16px;color:var(--dim);font-size:13px}
+.progress{display:flex;gap:6px;margin-top:4px}
+.prog-dot{width:7px;height:7px;border-radius:50%;background:var(--border)}
+.prog-dot.done{background:var(--accent)}
+.prog-dot.curr{background:var(--accent2)}
+
+/* FEEDBACK */
+.fb-header{text-align:center;padding:40px 20px 24px}
+.fb-title{font-family:'Noto Serif JP',serif;font-size:22px;font-weight:300;letter-spacing:3px;margin-bottom:6px}
+.fb-sub{font-size:12px;color:var(--dim);letter-spacing:1px}
+.score-card{margin:0 20px 20px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px;text-align:center}
+.score-num{font-family:'Noto Serif JP',serif;font-size:56px;color:var(--accent);line-height:1}
+.score-label{font-size:11px;color:var(--dim);letter-spacing:2px;margin-top:6px}
+.fb-section{padding:0 20px 20px}
+.fb-section-title{font-size:10px;letter-spacing:3px;color:var(--accent);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.fb-content{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;font-size:14px;line-height:2;white-space:pre-wrap}
+.qa-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:10px}
+.qa-q{padding:10px 14px;font-size:12px;color:var(--accent2);background:var(--surface2);border-bottom:1px solid var(--border)}
+.qa-a{padding:12px 14px;font-size:13px;color:var(--dim);line-height:1.8}
+.restart-btn{display:block;margin:10px 20px 40px;background:transparent;border:1px solid var(--accent);color:var(--accent);border-radius:var(--radius);padding:14px;font-family:'Noto Sans JP',sans-serif;font-size:13px;letter-spacing:2px;cursor:pointer;text-align:center;width:calc(100% - 40px);transition:all .2s}
+.restart-btn:active{background:var(--accent);color:var(--bg)}
+.loading-spin{display:inline-block;width:16px;height:16px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;margin-right:8px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.no-mic-note{font-size:12px;color:var(--muted);text-align:center;padding:8px}
+</style>
+</head>
+<body>
+
+<!-- TOP SCREEN -->
+<div id="screen-top" class="screen active">
+  <div class="top-bar">
+    <div class="badge">FP 1級</div>
+    <h1>模擬面接</h1>
+  </div>
+
+  <div class="section">
+    <div class="section-title">問題を選ぶ</div>
+
+    <div class="card">
+      <div class="select-grid">
+        <div class="sel-btn active" id="mode-part" onclick="setMode('part')">Part 選択</div>
+        <div class="sel-btn" id="mode-direct" onclick="setMode('direct')">直接選択</div>
+        <div class="sel-btn" id="mode-random" onclick="setMode('random')">ランダム</div>
+        <div class="sel-btn" id="mode-keyword" onclick="setMode('keyword')">キーワード</div>
+      </div>
+
+      <div id="opt-part">
+        <div class="select-grid" style="margin-bottom:0">
+          <div class="sel-btn active" id="part-1" onclick="setPart(1)">Part 1</div>
+          <div class="sel-btn" id="part-2" onclick="setPart(2)">Part 2</div>
+        </div>
+      </div>
+
+      <div id="opt-direct" style="display:none">
+        <div class="exam-list" id="exam-list"></div>
+      </div>
+
+      <div id="opt-random" style="display:none">
+        <p style="font-size:13px;color:var(--dim);padding:8px 0">Part1・Part2からランダムに1問選択します</p>
+      </div>
+
+      <div id="opt-keyword" style="display:none;margin-top:8px">
+        <input type="text" id="keyword-input" placeholder="例：相続、NISA、等価交換..." oninput="searchKeyword()">
+        <div class="exam-list" id="keyword-results" style="margin-top:10px"></div>
+      </div>
+    </div>
+
+    <div class="selected-info" id="selected-info"></div>
+  </div>
+
+  <div class="section" style="padding-top:0">
+    <div class="section-title">オプション</div>
+    <div class="card">
+      <div class="toggle-row" style="margin-bottom:10px">
+        <span class="toggle-label" style="font-size:12px;color:var(--dim)">音声</span>
+        <div class="select-grid" style="margin:0;width:120px">
+          <div class="sel-btn" id="voice-m" onclick="setVoiceGender('m')" style="padding:8px 4px;font-size:12px">男性</div>
+          <div class="sel-btn active" id="voice-f" onclick="setVoiceGender('f')" style="padding:8px 4px;font-size:12px">女性</div>
+        </div>
+      </div>
+      <div class="range-row">
+        <label>速さ</label>
+        <input type="range" min="0.8" max="1.5" step="0.05" value="1.0" id="rate-slider" oninput="document.getElementById('rate-val').textContent=parseFloat(this.value).toFixed(2)">
+        <span class="range-val" id="rate-val">1.0</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding:0 20px">
+    <button class="start-btn" id="start-btn" onclick="startInterview()" disabled>面接を開始する</button>
+  </div>
+</div>
+
+<!-- INTERVIEW SCREEN -->
+<div id="screen-interview" class="screen">
+  <div class="interview-header">
+    <div>
+      <div class="phase-label">口頭試問</div>
+      <div class="progress" id="progress"></div>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <div class="timer" id="timer">12:00</div>
+    </div>
+  </div>
+  <div style="display:flex;gap:8px;padding:8px 20px;border-bottom:1px solid var(--border)">
+    <button onclick="confirmAbort()" style="flex:1;background:transparent;border:1px solid var(--border);border-radius:var(--radius);color:var(--dim);font-family:'Noto Sans JP',sans-serif;font-size:12px;padding:8px;cursor:pointer;">中止</button>
+    <button onclick="repeatQuestion()" style="flex:1;background:transparent;border:1px solid var(--border);border-radius:var(--radius);color:var(--dim);font-family:'Noto Sans JP',sans-serif;font-size:12px;padding:8px;cursor:pointer;">🔁 もう一度</button>
+    <button onclick="confirmRestart()" style="flex:1;background:transparent;border:1px solid var(--border);border-radius:var(--radius);color:var(--dim);font-family:'Noto Sans JP',sans-serif;font-size:12px;padding:8px;cursor:pointer;">やり直す</button>
+  </div>
+  <div id="iv-voice-bar" style="display:flex;align-items:center;gap:8px;padding:8px 20px;border-bottom:1px solid var(--border);background:var(--surface2)">
+    <span style="font-size:11px;color:var(--muted)">音声</span>
+    <div class="sel-btn" id="iv-voice-m" onclick="setVoiceGenderLive('m')" style="padding:5px 10px;font-size:12px;flex:0">男</div>
+    <div class="sel-btn active" id="iv-voice-f" onclick="setVoiceGenderLive('f')" style="padding:5px 10px;font-size:12px;flex:0">女</div>
+    <span style="font-size:11px;color:var(--muted);margin-left:8px">速さ</span>
+    <input type="range" min="0.8" max="1.5" step="0.05" value="1.0" id="iv-rate-slider" oninput="setRateLive(this.value)" style="flex:1;accent-color:var(--accent)">
+    <span style="font-size:12px;min-width:28px;color:var(--text)" id="iv-rate-val">1.0</span>
+  </div>
+  <div class="timer-bar"><div class="timer-fill" id="timer-fill" style="width:100%"></div></div>
+
+  <div class="interview-body">
+    <div class="q-block" id="q-block">
+      <div class="q-label">面接官</div>
+      <div class="q-text" id="q-text"></div>
+      <div class="dots" id="speaking-dots" style="display:none"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+    </div>
+
+    <div class="answer-area" id="answer-area" style="display:none">
+      <div class="a-label">あなたの回答</div>
+      <div class="mic-wrap" id="mic-wrap">
+        <button class="mic-btn" id="mic-btn" onclick="toggleMic()">🎤</button>
+        <div class="mic-status" id="mic-status">タップして録音開始</div>
+        <div class="transcript" id="transcript">（ここに音声認識の内容が表示されます）</div>
+        <button id="mic-done-btn" onclick="micDone()" style="display:none;background:var(--accent);color:var(--bg);border:none;border-radius:var(--radius);padding:10px 28px;font-family:'Noto Sans JP',sans-serif;font-size:13px;cursor:pointer;margin-top:4px">発言終了 →</button>
+      </div>
+      <div class="no-mic-note" id="no-mic-note" style="display:none">マイクが使えません。テキストで回答してください。</div>
+      <textarea id="text-input" placeholder="テキストで回答を入力..."></textarea>
+      <div class="btn-row">
+        <button class="btn btn-secondary" onclick="skipAnswer()">スキップ</button>
+        <button class="btn btn-primary" onclick="submitAnswer()">送信 →</button>
+      </div>
+    </div>
+
+    <div class="thinking" id="thinking" style="display:none">
+      <div class="loading-spin"></div>考えています...
+    </div>
+
+    <div id="history" style="margin-top:20px"></div>
+  </div>
+</div>
+
+<!-- FEEDBACK SCREEN -->
+<div id="screen-feedback" class="screen">
+  <div class="top-bar">
+    <div class="badge">結果</div>
+    <h1>面接終了</h1>
+  </div>
+  <div class="fb-header">
+    <div class="fb-title" id="fb-title">面接終了</div>
+    <div class="fb-sub" id="fb-sub"></div>
+  </div>
+
+  <div class="fb-section">
+    <div class="fb-section-title">CLAUDE へのフィードバック依頼</div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;">
+      <p style="font-size:13px;color:var(--dim);line-height:1.8;margin-bottom:16px">以下のボタンを押してコピーし、Claudeのチャットに貼り付けてください。<br>模範解答との相違点・過不足をフィードバックしてもらえます。</p>
+      <button onclick="copyFeedbackText()" style="width:100%;background:var(--accent);color:var(--bg);border:none;border-radius:var(--radius);padding:14px;font-family:'Noto Sans JP',sans-serif;font-size:14px;letter-spacing:2px;cursor:pointer;" id="copy-btn">
+        📋 フィードバック依頼文をコピー
+      </button>
+      <div id="copy-done" style="display:none;text-align:center;margin-top:10px;font-size:13px;color:var(--green)">✅ コピーしました！Claudeのチャットに貼り付けてください</div>
+    </div>
+  </div>
+
+  <div class="fb-section">
+    <div class="fb-section-title">質疑応答ログ</div>
+    <div id="qa-log"></div>
+  </div>
+  <button class="restart-btn" onclick="restart()">もう一度やり直す</button>
+</div>
+
+<script>
+// ===== DATA =====
+const EXAM_DATA = {"exams": [{"id": "2026-02-15-part1", "title": "2025年度第3回 Part1（2026年2月15日）", "setsurei": "　Ａさん（60歳）は、個人で建築設計事務所を経営している建築士である。妻Ｂさん（60歳）は、青色事業専従者として建築設計事務所の経理業務を担当している。\n\n　Ａさんは、大都市圏近郊のＳ市内において、ターミナル駅を中心とした商業地域内に５階建てのテナントビルとその隣地である甲土地（200㎡）を所有しており、５階を自身の建築設計事務所として利用している。テナントビルの１階から４階は貸事務所として賃貸しており、甲土地はコインパーキングを運営するＸ社に賃貸している（駐車場設備の設置や運営はＸ社が行っている）。\n\n　Ａさんには長男Ｃさん（35歳）と長女Ｄさん（33歳）の２人の子がいる。Ａさん夫婦と同居している長男Ｃさんは、建築士として他の事務所に勤務しているが、今春よりＡさんの事務所へ入所することとなった。Ａさんは先日、同業の知人から「法人を設立すれば所得税や将来の相続税の負担を軽減することができるらしい」との話を聞いた。ここ数年、建築設計事務所の年間所得は約2,500万円を超えており、Ａさんは法人化のメリットとデメリットを整理したうえで、長男Ｃさんの入所を機に事務所の法人化を検討したいと思っている。また、不動産所得についても前年は約2,000万円を超えているため、設計業を法人化する場合は、不動産賃貸業も法人化したいと思っており、１つの法人の中で設計業と不動産賃貸業を営む形式をとろうと考えている。\n\n　Ａさんは、将来は長男Ｃさんに建築設計事務所の事業を承継させたいと考えており、自身が出資した法人を承継する場合、株式の評価など、どのように相続税が計算されるのか、今のうちに整理しておきたいと思っている。\n\n　また、会社員の夫と子の３人で、隣県の賃貸マンションで暮らしている長女Ｄさんから、分譲マンションの購入を検討していることを聞いたＡさんは、その援助をしてやりたいと思っている。\n\n【Ａさんの家族構成（推定相続人）】\n\n　妻Ｂさん （60歳）：青色事業専従者。Ａさんと自宅で同居している。\n\n【Ａさんの主な所有財産の概要】（相続税評価額、土地は小規模宅地等の評価減適用前）\n\n⒈ 現預金 ： 1億円\n⒉ 自宅\n　①土地(300㎡) ： 4,000万円\n　②建物 ： 1,000万円\n⒊ テナントビル\n　①土地(400㎡) ： 1億円\n　②建物 ： 8,000万円\n⒋ 甲土地(200㎡) ： 5,400万円\n⒌ 事業用資産 ： 100万円（建物以外の減価償却資産）\n　合計 ： 3億9,500万円\n\n※Ａさんの相続に係る相続税額は、約9,000万円（配偶者の税額軽減・小規模宅地等の評価減適用前）と見積もられている。\n\n（注）設例に関し、詳細な計算を行う必要はない。", "questions": [{"main": "設例をじっくり読んだと思いますが、Aさんの相談内容と問題点について項目だけで構いませんので全てあげてください。", "followups": ["それでは、今あげた問題点を解決するためにどのような提案・方策が考えられますか？", "Aさんは法人化を検討していますが、メリットを教えてください。", "他にありませんか？", "デメリットを教えてください。", "Ａさんにはどのようなアドバイスをしますか？", "Aさんは設計業と不動産賃貸業を1つの法人で行いたいと言っています。これにどうアドバイスしますか？", "不動産賃貸業を法人化する場合は、どうアドバイスしますか？", "自社株の評価や相続税の計算については、どのような仕組みになりますか？", "長女Ｄさんに対し、分譲マンションの購入援助をしてやりたいと思っていますが、どのようなアドバイスをしますか？", "住宅取得等資金の贈与について説明してください。", "1,000万円を超える援助を検討している場合はどのような提案をしますか？", "相続時精算課税制度の留意点について説明してください。", "最後に、FPが守るべき職業倫理を６つあげてください。", "どれもFPにとっては大事なことだと思いますが、今回のケースでは特にどれを重視しますか？"], "model": "Aさんの相談内容と問題点は大きく分けて4点あります。\n\n1つ目は、高額な所得税を軽減するための事務所と不動産賃貸業の法人化について。\n2つ目は、長男Cさんへのスムーズな事業承継と自社株評価の整理。\n3つ目は、長女Dさんへのマンション購入資金の援助方法。\n4つ目は、これらに伴う将来の相続税（約9,000万円）への対策と遺産分割の公平性です。\n\n---\n\nメリットは、家族への役員報酬分散による超過累進税率の緩和と、給与所得控除の活用で世帯全体の税負担を抑えられる点です。\n\n個人事業主では利益のすべてがAさんの所得となりますが、法人化することで、Aさん、妻Bさん、長男Cさんの3人に役員報酬を分散して支払うことができます。\n\n日本の所得税は超過累進税率であるため、所得を分散することで世帯全体の適用税率を下げることが可能です。\n\nまた、役員報酬として受け取る側では「給与所得控除」を適用できるため、個人事業の時よりも課税対象となる所得（課税標準）を圧縮できます。\n\n---\n\n役員自身の退職金を経費として積み立てることが可能になるほか、生命保険料の支払いや、賃貸物件を社宅として扱うことによる節税など、個人事業主よりも経費として認められる範囲が広がります。\n\n将来の収益（不動産賃料など）が個人ではなく法人に蓄積されるため、Aさんの個人資産の増加を抑え、相続税の増大を抑制できます。\nまた、長男Cさんに法人の株式を計画的に贈与することで、事業承継を円滑に進めることができます。\n\n---\n\nデメリットは、法人設立費用などのコスト増に加え、社会保険料の負担増、また法人の利益が蓄積されることによる将来の株価上昇リスクが挙げられます。\n\nまた、法人が赤字であっても、資本金や従業員数に応じた「均等割（最低でも年間約7万円程度）」を毎年支払う義務が生じます。\n\n---\n\n節税のみを目的とするのではなく、長男Ｃさんへの事業承継を見据え、所得水準・社会保険負担・株式承継計画を総合的に検討したうえで法人化を判断するよう助言します。\n\n---\n\n管理は楽になりますが、慎重な判断を促します。\n設計業務には損害賠償等のリスクがありますが、不動産を同じ法人に持つと、その事業リスクに大切な収益物件が晒されることになります。\n\nまた、将来「設計は長男、不動産は長女」のように分けたくなった場合、1つの法人では切り離しが困難です。\n「倒産隔離」と「柔軟な承継」の観点から、法人を分ける選択肢も提示します。\n\n---\n\n不動産賃貸業を法人化する場合、建物の所有権のみを法人に移し、土地は個人のまま貸し出す「土地の無償返還に関する届出」を活用した形態などを検討します。\nこれにより、法人の利益が過大に蓄積されるのを防ぎ、将来の事業承継時の税負担（相続税・贈与税）を抑える準備を今から行うよう助言します。\n\n---\n\nAさんの会社は同族会社となるため、原則として「類似業種比準方式」や「純資産価額方式」で評価されます。\n不動産を法人に移すと、その収益で純資産が増え、株価が上昇し続けます。\n対策として、長男Cさんへの早期の生前贈与や、法人版事業承継税制の活用による納税猶予の可能性を専門家と共に検討するよう助言します。\n\n---\n\n住宅取得等資金の贈与を受けた場合の非課税特例の活用をアドバイスします。\n\n---\n\n父母や祖父母などの直系尊属から住宅取得資金の贈与を受けた場合、一定の要件を満たせば最大1,000万円（省エネ等住宅の場合）または500万円（それ以外の住宅の場合）まで贈与税が非課税になります。\nDさんの所得制限（合計所得金額2,000万円以下）や、マンションの床面積要件（50㎡以上240㎡以下など）を満たす必要があるため、物件選定の段階で要件を確認するようアドバイスします。\n\n---\n\n1,000万円を超える多額の援助を検討されている場合には、相続時精算課税の活用も視野に入れます。\nAさんは60歳であり、Dさんは33歳であるため、この制度を選択することが可能です。\n2,500万円までの贈与については、贈与時点での税負担をゼロに抑えることができます。\n\n---\n\n留意点は、この制度は一度選択すると撤回できず、将来の相続時に「贈与時の価額」で相続財産に加算して精算されることになります。\n将来の相続税（見積額9,000万円）を考慮し、トータルの税負担が有利になるかを精査すべきです。\n\n---\n\n顧客利益の優先、守秘義務の遵守、顧客に対する説明義務、インフォームドコンセント、コンプライアンスの徹底、FP自身の能力の啓発です。\n\n---\n\n今回のケースでは、インフォームドコンセントを重視します。\n\nAさんは「法人化すれば税負担が軽減される」という知人（コンサルタント）の断片的な情報を鵜呑みにしようとしています。\nしかし、実際には法人住民税の均等割や社会保険料の負担増、自社株評価の上昇リスク、事務負担の増加など、多くのデメリットも存在します。\nFPとして、メリットだけでなくこれらの負の側面も網羅的に説明し、Aさんが「本当に自分の望む形か」を納得して判断できるように導く必要があり、必ず同意を得て提案することを重視します。"}]}, {"id": "2026-02-14-part2", "title": "2025年度第3回 Part2（2026年2月14日）", "setsurei": "　Ａさんは、父親から引き継いだ不動産の賃貸収入で生計を立てていけると考え、勤務していた会社を１年前に早期退職した。また、塾で講師をしていた妻Ｂさんも同じ時期に退職している。Ａさんは、不動産を引き継いでから初めて１年分の家賃収入等を確定申告することになったが、所得税が思っていた以上の金額となり、相当な負担を感じていたところ、賃貸経営セミナーで知り合ったコンサルタントのＤさんから、所得税の軽減対策として下記の提案を受け、会社の設立からすべて請け負うと言われた。\n\n【Ｄさんの提案】\n\n　長男Ｃさんが100％出資して不動産管理業務を行うＺ社を設立し、Ａさんは管理報酬としてＺ社に年間650万円を支払う。Ｚ社は、Ａさんがこれまで行っていた入居者管理やトラブル対応等の業務を行い、それ以外の管理業務については、従前と同じ条件（年間150万円）で不動産管理会社のＹ社に再委託する。Ｚ社の役員は妻Ｂさんと長男Ｃさんとし、Ｚ社は役員報酬をそれぞれ年間123万円ずつ支払い、残りの254万円はＺ社の諸経費等に充当する。\n\n＜Ｚ社設立前＞\n1. 家賃収入等 ： 3,400万円\n2. 必要経費（青色申告特別控除額を含む） ： 1,100万円\n3. Ａさんの不動産所得 ： 2,300万円\n\n＜Ｚ社設立後＞\n1. 家賃収入等 ： 3,400万円\n2. 必要経費（青色申告特別控除額を含む） ： 1,600万円\n3. Ａさんの不動産所得 ： 1,800万円\n※妻Ｂさんと長男Ｃさんは、Ｚ社からの役員報酬以外の収入はないものとする。\n\n　Ａさんは、Ｄさんの提案どおりにすれば所得税の軽減になるのか、このような対策をすることで何か問題は生じないのか不安になり、ＦＰであるあなたに相談を持ちかけた。\n\n(FPへの質問事項)\n\n1. Aさんに対して、最適なアドバイスをするためには、示された情報のほかに、どのような情報が必要ですか。以下の①および②に整理して説明してください。\n　①Aさんから直接聞いて確認する情報\n　②FPであるあなた自身が調べて確認する情報\n2. 対策前のＡさんの所得税に比べ、対策後のＡさん・妻Ｂさん・長男Ｃさんの所得税の合計額が減少する理由を説明してください。\n3. 不動産の管理業務にはどのようなものがあるか、具体的な項目を挙げてください。\n4. Ｄさんの提案どおりの対策を実行した場合、不動産所得の必要経費の計算上、何か問題は生じませんか。\n5. 本事案に関与する専門職業家にはどのような方々がいますか。\n\n(注)設例に関し、詳細な計算を行う必要はない。", "questions": [{"main": "Aさんに対して、最適なアドバイスをするためには、示された情報のほかに、どのような情報が必要ですか？\nAさんから直接聞いて確認する情報は、どのようなことですか？", "followups": ["FPであるあなた自身が調べて確認する情報は、どのようなことですか？", "対策前と比較して、対策後にＡさん一家の所得税合計額が減少する理由を説明してください。", "不動産の管理業務にはどのようなものがありますか？", "Ｄさんの提案どおりの対策を実行した場合、不動産所得の必要経費計算上の問題点はありますか？", "Ｄさんの提案どおりの対策について、他に問題はありませんか？", "FP業務では、色々な専門職業家と連携することもあると思いますが、\n今回のケースで関与する、専門職業家には、どのような方々がいますか？"], "model": "Aさんから直接聞いて確認する情報は、主に5点あります。\n\n1つ目は、長男Cさんの意思と就業能力です。\nCさんは現在無職ですが、新たに設立するZ社の代表取締役および株主として、実際に不動産管理の実務に従事する意思と能力があるかを確認します。\n実態のない役員報酬や管理実務は、税務署から否認されるリスク（同族会社における行為計算の否認等）があるためです。\n\n2つ目は、不動産賃貸経営の詳細と現状です。\n所有している共同住宅や貸駐車場の所在地、築年数、入居率、大規模修繕の履歴や今後の予定を確認します。\nこれらは、年間650万円という管理報酬が、社会通念上妥当な金額（適正な実務実態があるか）を判断するために不可欠です。\n\n3つ目は、管理会社Y社との現在の契約内容です。\n現在、年間150万円で委託している業務の具体的な範囲（清掃、巡回、集金代行など）を確認します。\nZ社が新たに行う「入居者管理やトラブル対応」の負荷が、追加の500万円（650万－150万）の報酬に見合うものかを検証するためです。\n\n4つ目は、Aさん夫妻のライフプランと将来のキャッシュフローです。\n早期退職後の生活費の充足状況や、公的年金の見込み額を確認します。\n所得の分散によりAさん個人の手取り額は減少するため、生活に支障がないかを確認する必要があります。\n\n5つ目は、将来の相続に関する考え方です。\n今回の対策は所得税軽減が主目的ですが、将来AさんからCさんへの相続を見据えた資産移転の意向があるかを確認します。\nCさんがZ社の株主となることは、将来の相続税対策（自社株評価）にも繋がるためです。\n\n最後に、他の資産や負債の状況です。\n不動産以外の上場株式や現預金の有無、および相続時に引き継いだ債務や借入金の有無を確認し、総合的な資産形成のアドバイスに役立てます。\n\n---\n\nFPである私自身が調査・確認すべき事項について、以下の3つの観点からお答えいたします。\n\nまず、税務・社会保険制度に関する調査として、Aさんの現在の所得税額と、Z社設立後のAさんの所得税、Bさん・Cさんの所得税、およびZ社の法人税等の合計額と、BさんとCさんがZ社から役員報酬を受け取ることで、新たに健康保険や厚生年金保険の被保険者となる場合、その会社負担分および本人負担分のコストが節税メリットを上回らないかを、税理士や社会保険労務士と試算し、実質的な減税効果を確認します。\n\n次に、親族が経営する管理会社への管理報酬が「不当に高額」として否認された過去の事例や、税務当局が認める報酬水準の目安を調査します。\n\n3点目は、Dさんの提案する約19%（650万円÷3,400万円）が社会通念上妥当か判断するため、X市における不動産管理報酬の市場相場として、対象物件と同規模の賃貸共同住宅や駐車場において、入居者管理やトラブル対応を含む管理報酬の一般的な料率（賃料収入の何％程度か）を調査します。\n\nまた、今後も年間3,400万円の家賃収入が維持できるか、空室リスクや家賃下落の可能性を周辺の競合物件の状況から調査します。\n\n最後に、法的規制および権利関係の調査として、Aさんが相続した物件の正確な所在地、構造、面積、および抵当権の設定状況などを不動産登記簿謄本（全部事項証明書）で確認し、経営の安定性を把握すること。\n\n将来の建て替えや有効活用を検討する際、容積率や用途地域などの制限がどのようになっているか都市計画法・建築基準法等の公的規制を調査すること。\n\n現在の管理委託契約書を確認し、Z社への管理業務の一部移管や再委託が可能か、法的な問題がないか不動産管理会社（Y社）の再委託に関する条件を確認します。\n\n---\n\n最大の理由は、「超過累進税率」の活用です。\nAさん一人の高い所得を、妻Bさんと長男Cさんの「給与所得」として分散することで、適用される税率をより低いレンジに下げることができます。\n\nまた、BさんとCさんが新たに「給与所得控除」を適用できるため、世帯全体での課税標準そのものが減少します。\n\n対策前はBさんやCさんに所得がないため、それらの人的控除を十分に活用できていない可能性がありますが、分散により各人が自身の所得から控除を適用できるようになり、合算した納税額が抑制されます。\n\nただし、これらのメリットがある一方で、Z社自身の法人税等の負担や、社会保険料の増加、また管理報酬額が実態に見合わない場合の税務リスクについても慎重に検討する必要があります。\n\n---\n\n大きく分けて3つあります。\n\n1つ目は賃料徴収や収支報告などの事務管理業務です。\n収支管理、管理費支払、収支報告書作成などが挙げられます。\n\n2つ目は入居者対応や契約更新などの対人管理業務です。\n入居者募集、契約締結、家賃管理、滞納対応、退去精算などを行ないます。\n\n3つ目は清掃や設備の保守点検などの建物・設備管理業務です。\n清掃、設備点検、修繕手配、法定点検対応があります。\n\nZ社設立後は、Z社が対人管理を行い、ハード面の管理をY社に再委託する計画となっています。\n\n---\n\nはい、管理報酬が「不当に高額である」とみなされ、経費算入を否認されるリスクがあります。\n\n管理報酬が賃料収入（3,400万円）の約19％に達し、一般的な管理報酬の相場（5〜10％）を大きく逸脱しています。\n\n現在、Y社が150万円（約4.4％）で主要な実務を行っているにもかかわらず、実態として「入居者管理やトラブル対応」を追加するだけで500万円も報酬が増えるのは、実態を伴わない利益移転と疑われ社会通念上不相当とみなされる可能性が極めて高いです。\n\n「同族会社等の行為計算の否認」の規定に抵触しないよう、業務内容に見合った適正な報酬額（時価）であるか再検討が必要です。\n\n---\n\nCさんが実際に管理実務に従事していない場合、役員報酬そのものが否認されるリスクがあります。\n現在「無職」のCさんが100％出資し、実務を担うという点に実効性があるかの確認が必要です。\n\nまた、BさんとCさんに年間123万円ずつの報酬を支払うことで、彼らが所得税・住民税の納税義務者となり、かつ社会保険（健康保険・厚生年金）の被保険者となることによるコスト増（会社負担分含む）を考慮しているかを確認します。\n\nDさんの提案を鵜呑みにせず、中立的な専門家の意見を仰ぎ、対策を実行する前には、業務内容の詳細な棚卸しを行い、適正な報酬水準を再検討する必要があることをAさんに強くお伝えします。\n\n---\n\n税理士。\nAさんの不動産所得の確定申告、およびZ社設立後の法人税等の申告業務を行います。\nDさんの提案における管理報酬額が、税務上の「適正な経費」として認められるかどうかの判断や、世帯全体の税負担軽減効果の正確な試算を依頼します。\n\n司法書士。\n不動産管理会社であるZ社の設立登記申請業務を担います。\n商号や目的の定款への記載など、法人設立に関する法的実務の代行を依頼します。\n\n社会保険労務士。\nZ社における妻Bさんや長男Cさんの社会保険（健康保険・厚生年金保険）の加入手続や、労働保険に関するアドバイスを行ないます。\n役員報酬を支払うことによる社会保険料の負担増と、手取り額の変化について具体的な試算を依頼します。\n\n弁護士。\nAさんとZ社、あるいはZ社とY社との間で締結する「不動産管理委託契約書」の法的チェック（リーガルチェック）を行います。\n親族間取引であっても、後のトラブルや税務調査に備え、契約内容の適法性と明確性を担保するために必要に応じて助言を仰ぎます。\n\n不動産鑑定士。\nAさんが支払う年間650万円の管理報酬が、市場価格と比較して妥当であるかどうかの鑑定や意見書の作成を検討します。\n税務上の「不当に高額」という指摘を回避するための、客観的なエビデンス（適正賃料・管理料の判定）を得る際に協力が必要となる場合があります。"}]}, {"id": "2026-02-14-part1", "title": "2025年度第3回 Part1（2026年2月14日）", "setsurei": "　５年前にＡさんの父親が死亡してから、母Ｂさんはマンションの８階に１人で住んでいたが、急に体調を崩し、2025年12月に死亡した。母Ｂさんの法定相続人は、Ａさんのほか、他県で家族と暮らしている妹Ｃさん（57歳）および弟Ｄさん（55歳）である。Ａさんは四十九日法要を終え、そろそろ相続手続に着手しようと遺品を整理していたところ、母Ｂさんが作成した自筆証書遺言を発見したため、すぐに妹Ｃさんと弟Ｄさんにそのことを伝え、家庭裁判所に検認の申立てを行った。後日、Ａさんたちは、通知された検認期日に家庭裁判所に集まり、遺言書の開封に立ち会ったところ、遺言書には「自分の所有するマンションの土地と建物はすべてＡさんに相続させる」ということだけが書いてあった。\n\n　自筆証書遺言の検認後、Ａさんたちは話合いを重ね、その結果、不動産については遺言書どおりにすべてＡさんが相続することになり、現預金と上場株式については妹Ｃさんと弟Ｄさんが２分の１ずつ相続し、不足分はＡさんが代償財産を交付することになった。\n\n　Ａさんは、母Ｂさんが加入していた生命保険に係る死亡保険金（1,500万円）と、自身が所有する上場株式（相続税評価額2,000万円）を、代償財産としてそれぞれ妹Ｃさんと弟Ｄさんに２分の１ずつ渡そうと考えているが、上場株式を代償財産とする場合、何か注意すべき点はないか知りたいと思っている。\n\n　また、Ａさんは、相続手続等をできるだけ自分でやろうと思っているが、手続にどのような書類が必要となるのか、財産の名義変更やその他の手続等はいつまでに行えばよいのかなど、わからないことが多く、何から手を付けるべきかを教えてほしいと思っている。\n\n　なお、母Ｂさんが住んでいたマンションの８階部分については、相続手続が落ち着いてから、当面は人に貸し出そうかと考えている。\n\n【母Ｂさんの相続財産の概要】（相続税評価額、土地は小規模宅地等の評価減適用前）\n\n⒈ 現預金 ： 7,000万円\n⒉ 上場株式 ： 3,000万円\n⒊ 自宅兼賃貸マンション(１棟、築15年、8階建て)\n　①土地(600㎡) ： 1億2,000万円\n　②建物 ： 5,000万円\n　合計 ： 2億7,000万円\n\n※賃貸マンションの年間家賃収入は約1,200万円である。\n\n※母Ｂさんは、契約者（＝保険料負担者）・被保険者を母Ｂさん、死亡保険金受取人をＡさんとする生命保険（死亡保険金1,500万円）に加入していた。\n\n※母Ｂさんの相続に係る相続税額は、約4,600万円（小規模宅地等の評価減適用前）と試算されている。\n\n（注）設例に関し、詳細な計算を行う必要はない。", "questions": [{"main": "設例をじっくり読んだと思いますが、Aさんの相談内容と問題点について項目だけで構いませんので全てあげてください。", "followups": ["それでは、今あげた問題点を解決するためにどのような提案・方策が考えられますか？", "Aさんは、上場株式を代償財産として妹Cさんと弟Dさんに渡そうと考えています。注意点はありますか。", "Aさんは相続手続をできるだけ自分で行いたいと考えています。どのような書類が必要ですか？", "これらの手続はいつまでに行えばよいです？", "Aさんは7階、母Bさんは8階に住んでいました。Aさんが相続した場合「特定居住用宅地等」の特例は適用できますか？", "母Bさんが住んでいたマンションを将来賃貸に出す予定ですが問題ありませんよね？", "最後に、FPが守るべき職業倫理を６つあげてください。", "どれもFPにとっては大事なことだと思いますが、今回のケースでは特にどれを重視しますか？"], "model": "Aさんの相談内容と問題点は大きく分けて5つあると認識しています。\n\n1つ目は、相続手続の全体像と期限について。\n2つ目は、遺言と異なる分割を行うための遺産分割協議書の作成。\n3つ目は、Aさんの所有株式を代償財産とする際の税務上の注意点。\n4つ目は、小規模宅地等の特例を適用した相続税の軽減。\n5つ目は、母B様が住んでいた8階部分の有効活用についてです。\n\n---\n\n最大の注意点はAさんに「譲渡所得税」が課される可能性があることです。\n自分の資産を代償財産として交付することは税務上の「譲渡」に該当します。交付時の時価がAさんの取得費を上回っていれば、その差益に課税されます。\n\nまた、受け取る兄弟との間で「いつの時点の時価」で評価するか合意し、遺産分割協議書に「誰が・何を・誰に・いくらの評価で支払うのか」を明記して贈与税のリスクを避ける必要があります。\n\n現金による代償分割と異なり課税が発生する点が最大の注意点であり、可能であれば預貯金等での代償を検討するようアドバイスします。\n\n---\n\nまずは母Bさんの出生から死亡までの連続した戸籍謄本、および相続人全員の戸籍・印鑑証明書が必要です。\n本件は遺言書の内容と異なる分割を行うため、相続人全員の合意を証明する「遺産分割協議書」が不可欠です。\nまた、自筆証書遺言には「検認済証明書」が付いていることも確認します。\n不動産の名義変更（相続登記）には固定資産評価証明書なども必要になります。\n\n---\n\n特に注意すべきは2つの期限です。\nまず、相続開始を知った日の翌日から4か月以内に行う「準確定申告」です。\n母Bさんには家賃収入があったため必須と考えられます。\n\n次に、10か月以内に行う「相続税の申告と納付」です。\n小規模宅地等の特例を適用するためにも、この期限を厳守する必要があります。\n\nまた、不動産を取得した相続人は、その取得を知った日から3年以内に相続登記をしなければなりません。2024年4月から義務化されており、正当な理由なく怠ると過料の対象となります。\n\n---\n\n適用可能です。\nこのマンションは「区分所有登記がされていない」ため、税務上は別々の階に住んでいても「同一の建物に居住している同居親族」として扱われます。\nしたがって、Aさん居住の7階と、母Bさん居住の8階部分の床面積に対応する敷地について、特定居住用宅地等の特例を適用できます。\n\n---\n\nいえ、注意が必要です。\n特例の適用を受けるためには、原則として相続税の申告期限まで居住の実態を維持しなければなりません。\n期限前に賃貸を開始してしまうと、居住用としての要件を外れる恐れがあるため、実際の入居は申告期限を待ってから行うようアドバイスいたします。\n\n---\n\n顧客利益の優先、守秘義務の遵守、顧客に対する説明義務、インフォームドコンセント、コンプライアンスの徹底、FP自身の能力の啓発です。\n\n---\n\n今回のケースでは、コンプライアンスの徹底を重視します。\n\nAさんは相続手続等をできるだけ自分でやろうと思っています。\nしかし、相続税の申告（小規模宅地等の特例の適用など）や、財産の名義変更、代償分割に伴う具体的な税額の試算など、専門的な法的手続きや税務判断が多く含まれています。\nFPが税理士法に抵触する具体的な税務相談や税額計算を直接行うことはできません。\nまた、遺言書の検認後の手続きや代償分割協議書の作成についても、司法書士や弁護士との連携が不可欠です。\nFPとして専門家との境界線を守り、適切に連携を促す姿勢が強く求められるためコンプライアンスの徹底を重視します。"}]}, {"id": "2026-02-08-part2", "title": "2025年度第3回 Part2（2026年2月8日）", "setsurei": "　Ａさんは、経済的に不安がある状況にはなく、相続財産を使って土地勘のある都内Ｋ区にある甲マンションへの投資を検討している。甲マンションはいわゆるタワーマンションで、売出価格は8,000万円である。不動産業者によれば、近年都内のマンション価格は高騰しており、現在の価格は５年前の約1.6倍とのことである。不動産投資は相続対策になると聞いたこともあるため、Ａさんは購入を検討する一方、今の価格で購入してよいのか迷いもある。また、Ｎ区内のワンルームマンションについては、現在の市場価格は3,500万円程度（５年前の約1.2倍の金額）とのことであり、築年が経過しているため売却してはどうかとの話があった。\n\n　一方で先日、長男Ｃさんからいずれ住宅を取得したいと考えているとの話があった。長男Ｃさんは、購入するのであれば中古の戸建て住宅がよいと思っているが、希望するエリアの住宅価格は規模が小さいものでも7,000万円前後と高額であり、現段階で多額の住宅ローンを組むことには不安がある。今後給料が増えてから、戸建て住宅の市場動向も見つつ時間をかけて検討していきたいとのことであった。\n\n　Ａさんは、長男Ｃさんの話を聞き、甲マンションを取得するのであれば、当面はそこに長男Ｃさんを住まわせるか、住宅購入資金として必要な現金を長男Ｃさんに贈与してはどうかと考えた。長男Ｃさんに話したところ、「甲マンションであれば職場にも近く、家賃負担も抑えられるため、住ませてもらえるのであればありがたい。ある程度経済的に余裕ができてから自身で戸建て住宅を購入したい」とのことであった。Ａさんは、長男Ｃさんが希望すれば、いっそのこと甲マンションを贈与してもよいと考えているが、どのように援助をすれば長男Ｃさんの意向も踏まえたうえで税金面でも有利となるのか、知りたいと思っている。\n\n　また、Ａさんは、相続財産の残金があれば金融資産への投資に活用することも考えており、知人に相談したところ、Ｊ－ＲＥＩＴも投資対象として検討してみてはどうかとアドバイスを受けた。Ａさんは今まで、Ｊ－ＲＥＩＴに投資をした経験がなく、その内容について知りたいと思っている。このような状況のもと、ＦＰであるあなたに相談があった。\n\n【母親から相続したＮ区内のワンルームマンションの概要】\n\n・父親（７年前に死亡）が20年前に取得\n・鉄筋コンクリート造８階建て、総戸数40戸、築30年、最寄駅から徒歩７分\n・物件は５階に所在、賃貸面積は25㎡、賃貸中\n・賃料月額は８万円（共益費込）、マンション管理組合へ支払う管理費は月額6,000円／戸、修繕積立金は月額5,000円／戸\n・固定資産税、都市計画税は年間約15万円\n・10年前に外壁の改修工事を行っている。\n\n【Ｋ区の甲マンションの概要】\n\n・鉄筋コンクリート造40階建て、総戸数200戸、築10年、最寄駅から徒歩10分\n・物件は２階に所在、専有面積は60㎡、２ＬＤＫ、現在売主が居住中\n・想定賃料月額は20万円（共益費込）、マンション管理組合へ支払う管理費は月額15,000円／戸、修繕積立金は月額18,000円／戸\n・諸経費（固定資産税・都市計画税、損害保険料、上記管理費・修繕積立金）控除後の年間の収入は約170万円\n・現在までに大規模修繕は行われていない。\n\n(FPへの質問事項)\n\n1. Aさんに対して、最適なアドバイスをするためには、示された情報のほかに、どのような情報が必要ですか。以下の①および②に整理して説明してください。\n　①Aさんから直接聞いて確認する情報\n　②FPであるあなた自身が調べて確認する情報\n2. Ａさんに甲マンションを取得することを勧めますか。その理由とともに教えてください。また、ワンルームマンションを売却する場合、課税関係はどうなりますか。\n3. Ａさんが考えている長男Ｃさんへの援助方法について、どのようなアドバイスをしますか。\n4. J-REITで投資先を選ぶ際には、どのような点を確認しますか。また、J-REITへの投資が実物不動産投資よりも優れている点と、リスクについて教えてください。\n5. 本事案に関与する専門職業家にはどのような方々がいますか。\n\n(注)設例に関し、詳細な計算を行う必要はない。", "questions": [{"main": "Aさんに対して、最適なアドバイスをするためには、示された情報のほかに、どのような情報が必要ですか？\nAさんから直接聞いて確認する情報は、どのようなことですか？", "followups": ["FPであるあなた自身が調べて確認する情報は、どのようなことですか？", "Ａさんに甲マンションを取得することを勧めますか。その理由とともに教えてください。", "ワンルームマンションを売却する場合、課税関係はどうなりますか？", "Ａさんが考えている長男Ｃさんへの援助方法について、どのようなアドバイスをしますか？", "どうしてですか？", "Aさんは、いっそのこと甲マンションを贈与してもよいと考えています。どのような提案をしますか？", "J-REITで投資先を選ぶ際には、どのような点を確認しますか？", "J-REITへの投資が実物不動産投資よりも優れている点と、リスクについて教えてください。", "リスクについて教えてください。", "FP業務では、色々な専門職業家と連携することもあると思いますが、\n今回のケースで関与する、専門職業家には、どのような方々がいますか？"], "model": "Aさんから直接聞いて確認する情報は、は主に4点あります。\n\nまず、ワンルームマンションの正確な「取得費」や「取得時期」を確認します。\n\n次に、Aさんのライフプランに関する意向として、今後の居住予定、老後生活資金の考え方、資産運用に対するリスク許容度を確認します。\n\n3点目に資産・負債の詳細として、金融資産の内訳、借入金や保証債務の有無、将来の大きな支出予定を確認します。\n\nさらに、家族関係および資産承継の意向として、誰にどの財産を承継させたいか、生前贈与の実施状況、長男Cさん夫妻には、将来取得したい一戸建ての具体的な希望時期やエリアを直接確認します。\n\n---\n\nFP自身が調べて確認する情報は、客観的情報として次の事項を調査します。\n\nまず、現地確認です。ワンルームマンションや甲マンションについて、人通りや交通量はどのくらいあるのか、商業施設、公共交通機関などの利便性、騒音、周辺住人などの物理的状況を、実際に現地で確認します。\n\n次に、権利関係として、法務局で登記事項証明書や公図を請求し、不動産の権利状況等を確認します。\n\nさらに、法令上の制限として、自治体の都市計画課等で、用途地域・都市計画等を確認し、今後の開発予定や周辺環境の変化を確認します。\n\nまた、市場調査として、周辺の取引事例を、地元の不動産業者等で確認し、路線価や実勢価格などの評価額を確認します。\n\n最後に、契約関係として賃貸借契約や担保設定の有無を確認し、金融機関の融資条件や市場動向についても調査します。\n\n---\n\nはい、取得をお勧めします。理由は3点あります。\n\n1点目は、Aさんは1億5,000万円という多額の現預金を相続しており、そのまま保有していると相続税評価額は額面通りとなります。\nこれを不動産に組み替えることで、建物は固定資産税評価額、土地は路線価による評価となり、さらに「マンション建物の相続税評価額の補正（いわゆるタワーマンション増税）」を考慮しても、現金保有より評価額を大きく圧縮できます。\n\n2点目は、1億5,000万円の現預金があるため、8,000万円の購入資金を全額自己資金で賄っても、手元に7,000万円の現金を残すことができ、Aさん夫妻の老後資金や不測の事態への備えとしても十分な余裕があります。\n\n3点目は、長男Cさんを住ませることで、彼の住居費負担を減らし、将来の住宅取得資金の蓄えをサポートできることです。\n\nただし、注意点として、現在の価格が5年前の1.6倍と高騰している点があげられます。\n投資用として見た場合のネット利回りは約2.1％（170万円÷8,000万円）と決して高くはなく、将来的な価格下落リスクや修繕積立金の増額リスクについても十分に考慮する必要があります。\n\n---\n\nお父様から所有期間を引き継ぐため、「長期譲渡所得」となります。\n税率は所得税・住民税・復興特別所得税を合わせて20.315％です。\n譲渡価額3,500万円から、減価償却後の取得費と譲渡費用を差し引いた利益に課税されます。\n\n相続税申告期限から3年以内の売却であれば、「相続財産を譲渡した場合の取得費加算の特例」を受けられる可能性があるため、その期間も確認します。\n\n---\n\n長男Cさんの「将来的に戸建てを取得したいが、現在は高額なローンに不安がある」という意向と、Aさんの「税金面でも有利に援助したい」というご希望を踏まえ、まず、Aさんが甲マンションを取得し、長男Cさん夫婦を無償で住ませる（使用貸借）ことを提案します。\n\n---\n\n親子間での無償の居住提供は、通常「扶養義務の範囲内」とみなされ、贈与税の対象とはなりません。\n当面は『使用貸借』として無償で住ませることにより、Cさんは本来支払うべき想定賃料（月額20万円）相当を、将来の戸建て購入に向けた自己資金として着実に貯蓄することができます。\n\n---\n\n「いっそのこと甲マンションを贈与する」という案もございますが、不動産取得税や登録免許税などの移転コストが高くなることや、住宅取得等資金の非課税特例が使えないことを考えると、「当面は無償で住ませ、将来の戸建て購入時に現金を贈与する」方法が、Cさんの意向にも沿い、かつ税務面でも最も有利であると提案します。\n\n将来、Cさんが本当に戸建てを買う際に『住宅取得等資金の贈与税の非課税特例』を使い、現金を贈与するのが税務上も最も効率的です。\nこの特例は「住宅を取得するための金銭」の贈与が対象です。\nAさんが甲マンション自体を贈与すると、この非課税特例が使えないだけでなく、不動産取得税などのコストも発生してしまいます。\n\n---\n\nJ-REITは実物不動産と違い、少額で分散投資ができ、流動性が高いのが魅力です。\n投資対象の用途と地域、稼働率を確認し、判断指標としては、純資産に対する割安度を示す「NAV倍率」や金利上昇リスクに備えた「LTV（有利子負債比率）」「分配金利回り」を確認します。\n\nNAV倍率（Net Asset Value）とは、J-REITの時価総額が保有不動産の純資産価値に対して何倍かを示す指標で、1倍を割っていれば割安と判断される目安になります。\n\n---\n\n今回検討されている甲マンションのような実物不動産投資と比較し、高い換金性や少額からの分散投資ができる点、管理の手間が不要な点が挙げられます。\n\n---\n\n一方で、証券投資としての特性上、価格変動リスクや分配金変動リスク、金利上昇局面では利払い負担増により価格が下落するリスクがあることや、元本保証がない点は十分に説明する必要があります。\n\nまた、運用会社やJ-REIT自体の経営悪化により、倒産や上場廃止となる可能性もゼロではありません。\n\n---\n\n税理士。\nN区のマンション売却に伴う「譲渡所得税」の計算や申告、長男Cさんへの住宅取得資金贈与における「非課税特例」の適用判定、および甲マンション取得による将来の「相続税圧縮効果」の具体的な試算を依頼します。\n\n司法書士。\n甲マンション（タワーマンション）購入時の「所有権保存登記・移転登記」、およびN区のマンション売却時の「所有権移転登記」の手続きを依頼します。また、将来的にCさんへ物件を贈与する場合はその登記手続きも担当します。\n\n宅地建物取引業者。\nN区のマンションの売却仲介、および甲マンションの購入手続きの媒介を依頼します。市場価格の査定や、重要事項説明書の作成・説明、売買契約の締結をサポートしてもらいます。\n\n不動産鑑定士。\n業者の提示する「5年前の1.6倍」という甲マンションの価格や、N区のマンションの価格が妥当であるか、公的な評価が必要な場合に調査報告書や鑑定評価書の作成を依頼することが考えられます。"}]}, {"id": "2026-02-08-part1", "title": "2025年度第3回 Part1（2026年2月8日）", "setsurei": "【事業承継について】\n\n　Ａさんの長男Ｃさん（47歳）は、大手精密機器メーカーで生産管理業務を経験した後、Ⅹ社に移り、現在は専務取締役として研究開発と生産部門を率いている。製品の豊富な知識と誠実な顧客対応で、得意先から大きな信頼を得ており、社内外で後継者として認められている。また、二男Ｅさん（42歳）は、総合商社で医療ビジネスに従事している。\n\n　Ａさんは、かねがね二男Ｅさんの営業力とビジネスセンスを高く評価しており、兄弟が力を合わせてＸ社を発展させてくれることが親としてもこの上ない喜びであると考えてきた。しかし、取引銀行から紹介を受けた事業承継コンサルタントや同業者仲間から、兄弟での事業承継は、将来的に経営方針の相違等から失敗するおそれがあるとも聞いており、Ｘ社株式の承継に踏み切れないでいた。ただ、いよいよ自身も高齢になり、事業承継税制（特例措置）の期限も迫る中、そろそろ決断をしなければならないと自覚している。幸い、長男Ｃさんと二男Ｅさんの関係は良好であり、２人ともＡさんの想いを全面的に受け入れている。また、二男Ｅさんは将来的な事業承継に備えて、総合商社を退職する決意を固めている。\n\n【資産承継等について】\n\nＡさんの長女Ｄさん（45歳）は、公務員の夫と子２人の４人で地方都市にある戸建て住宅に暮らしている。地元に戻る予定はないものの、お盆や年末年始には孫を連れて帰省しており、Ａさんも毎回楽しみにしている。来年は孫が高校・大学に入学する予定であり、Ａさんは、祖父として学費の支援をしてあげたいと思っている。\n\n【Ａさんの所有財産の概要】（相続税評価額、土地は小規模宅地等の評価減適用前）\n\n⒈ 現預金 ： 1億円（役員退職金は考慮していない）\n⒉ X社株式 ： 4億8,000万円\n⒊ 自宅\n　①土地(200㎡) ： 5,000万円\n　②建物 ： 2,000万円\n⒋ X社工場土地(500㎡) ： 1億6,000万円（無償返還方式、通常の地代で賃貸）\n⒌ 月極駐車場(300㎡) ： 9,000万円（コインパーキング設備付き）\n　合計 ： 9億円\n\n※Ａさんの相続に係る相続税額は、約２億9,000万円（配偶者の税額軽減・小規模宅地等の評価減適用前）と見積もられています。\n\n【Ｘ社の概要】\n\n資本金：2,000万円 会社規模：大会社 従業員数：50人 配当：実施していない\n\n【Ａさんの家族構成（推定相続人）】\n\n妻Ｂさん （73歳）：専業主婦。Ａさんと自宅で同居している。\n長男Ｃさん（47歳）：Ⅹ社専務取締役。妻と子２人の４人で戸建て住宅に居住している。\n長女Ｄさん（45歳）：専業主婦。公務員の夫と子２人の４人で戸建て住宅に居住している。\n二男Ｅさん（42歳）：総合商社勤務。妻と子の３人で分譲マンションに居住している。\n\n（注）設例に関し、詳細な計算を行う必要はない。", "questions": [{"main": "設例をじっくり読んだと思いますが、Aさんの相談内容と問題点について項目だけで構いませんので全てあげてください。", "followups": ["それでは、今あげた問題点を解決するためにどのような提案・方策が考えられますか？", "事業承継税制（特例措置）について、Aさんにどのようなアドバイスをしますか？", "次男Eさんも後継者にする場合、特例措置は適用可能ですか？", "同業者仲間などは「兄弟での承継は失敗する」と懸念していますが、問題点を挙げてください。", "兄弟共同承継での経営権の安定確保と将来の株式分散防止について解決策を提示してください。", "長女Dさんに対して、円滑な遺産分割を行うための具体的な方策を挙げてください。", "今期計画している5,000万円の設備投資について、税務上のアドバイスはありますか？", "最後に、FPが守るべき職業倫理を６つあげてください。", "どれもFPにとっては大事なことだと思いますが、今回のケースでは特にどれを重視しますか？"], "model": "Aさんの相談内容と問題点は大きく分けて3つあると認識しています。\n\n1つ目は事業承継です。\n特例措置の計画提出期限が来月末に迫る中、長男Cさんと次男Eさんの兄弟共同経営をどう安定させるかという点。\n\n2つ目は納税資金です。\n相続税額の概算約2億9,000万円に対し、現預金が1億円しかなく、約1億9,000万円が不足しています。\n\n3つ目は円滑な遺産分割です。\n資産の大部分が自社株と工場敷地であり、経営に関与しない長女Dさんへの配分と遺留分対策が急務です。\n\n加えて、引退後の生活資金確保および老後の生活設計も含まれると考えられます。\n\n---\n\nまずは「特例承継計画」を提出することを最優先にアドバイスします。\nこれを出しておかなければ、将来100%の納税猶予を受けられる選択肢が消えてしまいます。\nその上で、経営承継円滑化法の「遺留分に関する民法特例」を活用して株価を固定し、将来の税負担を確定させるメリットを伝えます。\n\nただし、制度は納税猶予であり、株式売却、代表者退任、会社解散などがあると猶予税額が課税される可能性があるため、長期的な経営継続体制を整えることが重要です。\n\nしたがって、Aさんには、税制メリットだけで判断するのではなく、会社の将来像と兄弟経営体制を踏まえたうえで、専門家と連携し早急に承継計画を具体化することをアドバイスします。\n\n---\n\n後継者は最大3名まで指定可能ですが、贈与時点で代表権を有している必要があります。\n\n---\n\nAさんが長男Cさんと二男Eさんの兄弟による共同経営を希望している場合、事業承継における主な問題点として、次の4点が考えられます。\n\nまず、経営権の分散による意思決定の停滞リスクです。\n兄弟で株式を均等に保有すると、意見が対立した場合に経営判断ができなくなる可能性があります。\n\n次に、将来世代で株式がさらに分散するリスクです。\n兄弟それぞれの相続が発生すると、株式が配偶者や子へ分散し、将来的に経営権が分裂する可能性があります。\n\n3点目は、後継者以外の相続人との公平性の問題です。\n自社株式は評価額が高額になりやすいため、遺産分割で不公平感が生じ、紛争につながるおそれがあります。\n\n4点目として、事業承継税制適用時の管理リスクです。\n兄弟双方が制度適用を受ける場合、継続要件を長期間満たす必要があり、経営体制変更が制約される可能性があります。\n\n以上のように、兄弟共同承継では、経営権の安定確保と将来の株式分散防止が最大の課題となります。\n\n---\n\n経営権の安定のためには、原則として長男Cさんに議決権の3分の2以上を集中させるべきです。\n議決権割合を調整し代表者を明確にすること、種類株式の活用、株主間契約の締結などにより意思決定の停滞を防止します。\n\nまた、「株主間合意書」を締結し、将来万が一対立した際の株式の取り扱いを事前に決めておくよう助言します。\n\n---\n\n自社株式は後継者へ集中させ、長女Dさんには金融資産など換金性資産を承継させる内容の公正証書遺言を作成するとともに、次の3つの施策を組み合わせて提案します。\n\n1つ目は、孫2人への「教育資金の一括贈与の非課税特例」です。\n計3,000万円を非課税で贈与し、Dさんの家計を直接支援します。\nただし、この非課税措置は、期限が延長されず令和8年3月31日までで終了する見込みです。\n\n2つ目は、「生命保険の活用」です。\nAさんを被保険者、受取人をDさんとすることで、納税資金や代償分割の原資を確保します。\n\n3つ目は、経営承継円滑化法に基づく「遺留分に関する民法の特例」です。\n推定相続人全員の合意と経産相の確認、家庭裁判所の許可を得ることで、贈与株式等を遺留分算定の基礎財産から除外（除外合意）または価額固定（固定合意）し、将来の争いを法的に防ぎます。\n\n---\n\n「中小企業経営強化税制」等による即時償却を選択することを提案します。\n今期の利益を圧縮することで自社株評価を引き下げ、そのタイミングで後継者へ株式を贈与すれば、より有利に承継を進められます。\nただし、会社全体のキャッシュフローへの影響は、顧問税理士と精査する必要があります。\n\n---\n\n顧客利益の優先、守秘義務の遵守、顧客に対する説明義務、インフォームドコンセント、コンプライアンスの徹底、FP自身の能力の啓発です。\n\n---\n\n今回のケースでは、顧客の利益の優先を重視します。\n\nAさんの「家族の絆」と「会社の発展」を同時に守るため、特定の親族に偏ることなく、全員が納得できる「三方よし」の解決策を、専門家チームと連携して提示することを重視します。"}]}, {"id": "2026-02-07-part2", "title": "2025年度第3回 Part2（2026年2月7日）", "setsurei": "　先日、長女Ｃさんから、「今の賃貸マンションが手狭になり、また、保育園などの送り迎えも大変になってきたので、二世帯住宅を建てて一緒に暮らせないか。お父さんたちが賛成なら夫もそうしたいと言っている」と相談があった。\n\n　ちょうど、Ａさんは自宅（相続で取得、築50年）の大規模修繕か建替えを考えていたこともあり、長女Ｃさんの提案を受け入れることにした。妻Ｂさんも娘家族と一緒に暮らせることをうれしく思っている。親子世帯で話し合った結果、建設資金はＡさんと長女Ｃさん夫婦が半分ずつ拠出し、完全分離型の二世帯住宅にしたいとの結論に達したが、ハウスメーカーの説明では、甲土地の広さでは希望する間取りは難しいとのことである。\n\n　Ａさんは、自宅がある甲土地のほかに乙土地を所有している。乙土地は、父親の代から普通借地としてＤさん（75歳）に賃貸しており、Ｄさんは、借地上に所有する乙建物（店舗兼用住宅）で喫茶店を経営しながら、妻と２人で暮らしている。Ａさんは、Ｄさんとは家族ぐるみの付き合いで、時々喫茶店に顔を出している。先日、Ａさんが喫茶店を訪れたとき、「そろそろ年だし店は閉めようと思う。Ａさんの承諾が得られれば、借地を売ったお金で住み慣れたこの近辺に土地を買い、夫婦２人で住むこじんまりした家屋を建てることを考えている」とＤさんから言われた。\n\n【Ａさんと長女Ｃさん夫婦の住宅計画】\n\n・完全分離型の二世帯住宅（１階に親世帯の玄関と子世帯の玄関を別々に配置）\n・１階 110㎡：親世帯２ＬＤＫ ※駐車スペース普通車２台分\n・２階 95㎡：子世帯３ＬＤＫ\n・予算6,000万円（Ａさん：自己資金3,000万円、Ｃさん夫婦：自己資金＋ローン3,000万円）\n\n【Ｄさんから聞いた住宅計画】\n\n・１階 66㎡：２ＬＤＫ ※駐車スペース普通車１台分\n・予算2,200万円（自己資金）土地購入費は、借地の売却資金を充当する予定\n\n※現在の借地上の乙建物は、１階100㎡（店舗50㎡、住居50㎡）２階50㎡（住居）、築60年\n\n※借地の開始時に権利金が支払われているかは不明。これまでに２回更新されているが、更新料の支払は行われていない。当該地は借地権の取引慣行のある地域である。なお、第三者に建替え前提で借地権を売却する場合、地主に借地権の譲渡承諾料および建替え承諾料等を支払う必要があり、これらを合計すると更地価格の10％程度となる。\n\n　Ａさんは、Ｄさんから借地権を買い取れば乙土地に二世帯住宅を建てられるのではないかと思い付いた。しかし、買取資金は手元になく、甲土地を売って費用を捻出しなければならないのか、頭を悩ませている。このような状況で、ＦＰであるあなたに相談があった。\n\n(FPへの質問事項)\n\n1. Aさんに対して、最適なアドバイスをするためには、示された情報のほかに、どのような情報が必要ですか。以下の①および②に整理して説明してください。\n　①Aさんから直接聞いて確認する情報\n　②FPであるあなた自身が調べて確認する情報\n2. Ｄさんが乙建物と借地権を売却する場合、譲渡所得の課税関係はどうなりますか。\n3. 本件の解決方法として、あなたはＡさんにどのようなアドバイスをしますか。\n4. Ａさんと長女Ｃさん夫婦が計画どおり完全分離型の二世帯住宅を建てた場合、その登記をするにあたって、将来の相続税の課税上、どのような点に注意すべきですか。\n5. 本事案に関与する専門職業家にはどのような方々がいますか。\n\n(注)設例に関し、詳細な計算を行う必要はない。", "questions": [{"main": "Aさんに対して、最適なアドバイスをするためには、示された情報のほかに、どのような情報が必要ですか？\n　①Aさんから直接聞いて確認する情報は、どのようなことですか？", "followups": ["②FPであるあなた自身が調べて確認する情報は、どのようなことですか？", "Ｄさんが乙建物と借地権を売却する場合、譲渡所得の課税関係はどうなりますか？", "Aさんは乙土地の借地権を買い取って二世帯住宅を建てたいと考えていますが、手元に買取資金がないと悩んでいます。\nこの状況を打開する具体的な解決策として、あなたはどのような提案をしますか？", "『甲土地の所有権』と、『乙土地の借地権』の交換ですね。\nその提案は、AさんとDさんの双方にどのようなメリットをもたらすのでしょうか？", "Dさんにとってはいかがですか？", "不動産を交換した場合、税務上は譲渡があったとみなされ、譲渡所得税がかかるのではありませんか？", "『固定資産の交換の特例』ですね。\n適用するための主な要件と、その効果を説明してください。", "Ａさんと長女Ｃさん夫婦が計画どおり完全分離型の二世帯住宅を建てた場合、その登記をするにあたって、将来の相続税の課税上、どのような点に注意すべきですか？", "小規模宅地等の特例を適用しやすくするには、どの登記方法が望ましいですか？", "FP業務では、色々な専門職業家と連携することもあると思いますが、\n今回のケースで関与する、専門職業家には、どのような方々がいますか？"], "model": "Aさんから直接聞いて確認する情報は、は主に6点あります。\n\n第1に、甲土地の正確な「取得費」や「取得時期」を確認します。\n\n第2に、二世帯住宅への居住意向です。\n同居の期間、完全分離型へのこだわり、将来単独居住へ戻る可能性などを確認します。\n\n第3に、甲土地に対する考え方です。\n売却意思の有無や将来の利用方針を確認します。\n\n第4に、乙土地の借地関係です。\n借地契約内容、地代、契約書の有無、Ｄさんとの関係性などを確認します。\n\n第5に、家族関係および相続意向です。\n長女夫婦への資産承継の考えや妻Ｂさんの意向を確認します。\n\n第6に、資金計画です。\n金融資産、年金収入、老後資金の余裕、3,000万円拠出後の生活資金への影響を確認します。\n\n---\n\nFP自身が調べて確認する情報は、客観的情報として次の事項を調査します。\n\nまず、現地確認です。\n甲土地、乙土地について、境界は明らかか、土壌汚染されていないか、勾配、工作物、車両、樹木などの物理的状況を、実際に現地で確認します。\n\n次に、権利関係として、法務局で登記事項証明書や公図を請求し、土地の権利状況等を確認します。\n\nさらに、法令上の制限として、自治体の都市計画課等で、用途地域・都市計画等を確認し、今後の開発予定や周辺環境の変化、建ぺい率・容積率、接道条件、建築可能面積を確認します。\n\nまた、市場調査として、周辺の取引事例を、地元の不動産業者等で確認し、甲土地・乙土地の時価、更地価格、借地権割合などを調査します。\nさらに、借地権関係として、借地契約の法的性質、譲渡承諾料や建替承諾料の慣行を確認します。\n\n最後に、融資条件や住宅ローン利用可能性も確認します。\n\n---\n\n乙建物および借地権はいずれも資産の譲渡に該当し、譲渡所得として課税されます。\n譲渡所得は、譲渡価額から取得費および譲渡費用を控除して計算します。\n\n借地権については、権利金や更新料が取得費となり、地主へ支払う譲渡承諾料や建替承諾料は譲渡費用となります。\n\n建物が店舗兼住宅ですので、居住用部分と事業用部分に按分して計算します。\n居住用部分については「居住用財産の3,000万円特別控除」や「10年超所有の軽減税率」が適用でき、税負担を大幅に抑えられる可能性があります。\n\n---\n\nAさんがご自宅として所有している『甲土地の所有権』と、Dさんが持っている『乙土地の借地権』を交換する方法をご提案します。\n\n---\n\nまずAさんの最大のメリットは、多額の現金（買取資金）を用意することなく、乙土地の借地権を取得できる点です。\n乙土地は270㎡で、指定建蔽率は50％のため、1階の建築可能面積は135㎡となります。希望の1階面積（110㎡）は十分に収まります。\nまた、指定容積率は100％（270㎡まで）であり、希望の延床面積（205㎡）も法的にクリア可能です。\nさらに、乙土地は南側・東側の2面で6mの公道に接しており、普通車3台分の駐車スペースも確保しやすい形状です。\n\n---\n\n借地権を地主に売却する場合、通常、第三者への譲渡で必要となる借地権価格の10%程度の譲渡承諾料は不要です。\n地主が直接買い取るため、手続きが簡略化され、借地権名義書換料として地主から承諾を得る必要がなく、借地権をAさんに売れば譲渡承諾料の支払いが不要になります。\n\nまた、Dさんは現在『借地を売ったお金で近辺に土地を買い、こじんまりした家屋を建てたい』と希望されています。\n135㎡ある甲土地の所有権を取得できれば、わざわざ新しい土地を探して購入する手間が省けます。\nまた、Dさんが想定している『1階66㎡の家屋』を建てるのにも、甲土地は十分な広さと立地条件を備えているため、まさに両者のニーズが合致するWin-Winの解決策となります。\n\n---\n\n原則としては譲渡所得として課税されます。しかし本件の場合、『固定資産の交換の特例』を適用できる可能性が高いと考えます。\n\n---\n\nまず効果ですが、要件を満たせば『譲渡がなかったもの』とみなされ、譲渡所得税を100％繰り延べることができます。\n\n適用要件としては主に4つあります。\n1つ目は、交換する資産が同種の固定資産であること。土地の所有権と借地権は『同種の資産』として扱われます。\n2つ目は、双方がその資産を1年以上所有しており、かつ交換のために取得したものではないこと。\n3つ目は、交換後も同じ用途、つまり今回は『居住用』として使用することです。\n4つ目は、交換する資産の時価の差額（交換差金）が、いずれか高い方の価額の『20％以内』であることです。\n\n---\n\n「区分所有登記」を避けることを強くアドバイスします。1階と2階を別々に登記してしまうと、将来Aさんの相続時に、長女Cさんが住む部分の敷地に対して「小規模宅地等の特例」が適用できなくなるリスクがあるからです。\n建物全体を「共有登記」または「Aさんの単独所有」とすることで、敷地全体について80%の評価減（特定居住用宅地等）を適用できるようにします。\nまた、拠出額と持分割合を一致させ、贈与税の問題が生じないよう注意します。\n\n---\n\n同居親族として評価される状態を維持することが重要です。\nそのため、区分所有建物とするよりも、一棟の共有建物として登記し、同一建物に居住している形を維持する方法が望ましいと考えます。\nまた土地についてはＡさん所有を基本とし、同居関係を明確にしておくことで、特定居住用宅地等として小規模宅地等の特例を適用しやすくなります。\n\n---\n\n不動産の取引に関する、課税上の具体的な税務相談は、税理士に、\n売買契約等における、宅地建物取引業法に規定する業務については、宅地建物取引士に、\n土地の所有権移転登記については、司法書士に、\n正確な測量と境界の明示、登記については土地家屋調査士に、\n測量に基づく適正な不動産価格の算定は不動産鑑定士と連携します。"}]}, {"id": "2026-02-15-part2", "title": "2025年度第3回 Part2（2026年2月15日）", "setsurei": "　Ａさん（62歳）は、三大都市圏近郊のＫ市で建設業を営んでおり、同市にある自宅（甲土地および甲建物、10年前に母親の相続で取得）で妻Ｂさん（60歳）と長男（32歳）夫妻および孫２人の６人で暮らしている。\n\n　先日、甲土地の北側に隣接する乙土地および乙建物の所有者で住人であるＣさん（84歳）から、「生活費を工面するために住まいを処分したいと思っているが、買ってもらえないだろうか。価格は5,000万円でお願いしたい」という申出を受けた。なお、その際Ｃさんが持参した登記簿によれば、乙土地上にはかなり前に設定された4,000万円の抵当権の設定があった。売却後、Ｃさんは近くにアパートを借りて住むとのことである。\n\n　Ｃさんは、母親と同居していたが、20年前に母親が亡くなってからはこの場所で１人暮らしをしており、家族はいない。Ｃさんと面識のある近隣の住民によれば、「Ｃさんの父親は母親が亡くなる前に他界しており、都内に住んでいた唯一の兄弟である兄Ｄさんも５年前に亡くなっている。兄Ｄさんには妻と２人の息子がいると聞いている。またＣさんは若い頃一度結婚していたが、その後に離婚して再婚はしていないと言っていた」とのことである。\n\n　Ａさんは、乙土地が買えれば、甲土地と一体で、事務所の新設や二世帯住宅の建築も可能となるので、ぜひ購入したいと考えている。経営する会社の業績は順調であり、個人での購入資金に問題はない。\n\n　ただ、１つ心配なことがある。Ｃさんが認知症を患っているのではないかという噂があることである。最近、Ｃさんと話したという近隣の住民によれば、Ｃさんは同じものが大量に配送されてきて困ったという話をしていることや、同じ話を何回も繰り返していたとのことで、夜中に独り歩き（徘徊）しているところを何度か見たという人もいるようである。また、希望価格が相場より安いことも気になっている。\n\n　Ｃさんは社交的な性格ではなく、これまでＡさんとも挨拶を交わす程度で深い交流はない。Ａさんは、自宅を買い取ってほしいという話をしにきたときにＣさんと対面しており、その際、会話自体は比較的問題なくできたものの、話し方や既に亡くなっていると聞いている母親に言われて相談に来たなどという発言に若干の違和感を覚えた。\n\n　このような状況で、Ｃさんと取引するにあたって不安を感じたＡさんは、ＦＰであるあなたのもとに相談に来た。\n\n(FPへの質問事項)\n\n1. Aさんに対して、最適なアドバイスをするためには、示された情報のほかに、どのような情報が必要ですか。以下の①および②に整理して説明してください。\n　①Aさんから直接聞いて確認する情報\n　②FPであるあなた自身が調べて確認する情報\n2. 乙土地の購入の話を進めるにあたって、Ａさんにどのようなアドバイスをしますか。\n3. ①Ｃさんと契約後、仮にＣさんが契約時すでに重度の認知症と診断されていた場合、売買契約はどうなりますか。\n\n　②Ｃさんが仮に重度の認知症と診断されていた場合、Ａさんが乙土地を購入するにはどのような方法がありますか。\n4. Ａさんが乙土地を購入するメリットとして、どのようなことが考えられますか。\n5. 本事案に関与する専門職業家にはどのような方々がいますか。\n\n(注)設例に関し、詳細な計算を行う必要はない。", "questions": [{"main": "Aさんに対して、最適なアドバイスをするためには、示された情報のほかに、どのような情報が必要ですか？\nAさんから直接聞いて確認する情報は、どのようなことですか？", "followups": ["FPであるあなた自身が調べて確認する情報は、どのようなことですか？", "乙土地購入について、Ａさんへどのようなアドバイスをしますか？", "Cさんの意志能力の確認について説明してください。", "抵当権の状況確認と抹消手続きについて説明してください。", "適正価格による取引の実施について説明してください。", "専門家の介在（直接取引の回避）について説明してください。", "仮にＣさんが契約時すでに重度の認知症だった場合、売買契約はどうなりますか？", "Ｃさんが仮に重度の認知症と診断されていた場合、Ａさんが乙土地を購入するにはどのような方法がありますか？", "乙土地はCさんが住んでますが、成年後見人による売却は可能ですか？", "Ａさんが乙土地を購入するメリットとして、どのようなことが考えられますか？", "土地の一体利用による建築の自由度と効率の向上について説明してください。", "事業・生活環境の充実と将来への備えについて説明してください。", "資産価値の向上と住環境の維持について説明してください。", "FP業務では、色々な専門職業家と連携することもあると思いますが、\n今回のケースで関与する、専門職業家には、どのような方々がいますか？"], "model": "Aさんから直接聞いて確認する情報は、大きく分けて以下の3つの観点から確認が必要です。\n\nまず、売主Cさんの「意思能力」と「生活実態」に関する詳細を確認します。\n本設例で最も懸念されるのは、契約の有効性です。Aさんが感じた違和感を深掘りする必要があります。\nCさんが認知症について医師の診断を受けているか、また介護保険の要介護認定を受けているかを確認します。\n近くに身の回りの世話をしている人や、財産管理をサポートしている親族・専門家（地域包括支援センター等）が関与していないか確認します。\n母親に言われて相談に来たという発言の真意や、売却後の移転先（アパート等）が具体的に決まっているか、本人の意思で生活費の工面を望んでいるのかを改めて聞き取ります。\n\n2つ目は、乙土地の「権利関係」と「価格」の妥当性です。\n登記簿上の情報とCさんの主張に相違がないか、また取引の安全性を確認します。\n登記簿にある4,000万円の抵当権について、現在の借入残高がいくらあり、5,000万円の売却代金で完済・抹消が可能かどうかを確認します。\n兄Dさんの遺族（代襲相続人となる可能性がある方々）との交流があるか、また今回の売却について彼らが知っているかを確認します。\n相場より安い5,000万円という価格が、どのような理由で設定されたのかをCさんに直接確認します。\n\n3つ目は、Aさんの「購入後の事業計画」と「資金計画」です。\n事務所の新設や二世帯住宅の建築について、いつ頃までに、どのような規模で考えているのか詳細を伺います。\n購入主体を「個人」とする予定ですが、将来的に経営する会社（建設業）の事務所として利用する場合、法人での購入や法人への賃貸も検討の余地があるか確認します。\n「個人での購入資金に問題はない」とのことですが、5,000万円の支払いのほか、解体費用や建築費用を含めた総予算の把握が必要です。\n\n---\n\nFP自身が調べて確認する情報は、取引の安全性確保と、Aさんの購入後の利便性を検証するため、主に「権利関係」「物件状況」「法令制限」の3点から調査を行います。\n\nまず、権利関係および登記詳細の調査のため、登記簿謄本（登記事項証明書）を取得し、正確な状況を把握します。\n登記簿にある4,000万円の抵当権について、債権者、設定受付日、および現在の債務の状況（残債が売却価格5,000万円を下回っているか等）を調査します。\n\nCさんには家族がなく、唯一の兄弟である兄Dさんも亡くなっているとの情報があります。\nもし将来的にCさんの意思能力が否定され、契約が取り消された場合などに備え、兄Dさんの子（代襲相続人）が何名いるかなどの親族関係をあらかじめ推認しておきます。\n\n2つ目は、物件の市場価格（時価）と環境の調査を行い、「5,000万円という希望価格が相場より安い」という懸念を解消します。\n近隣の公示地価、基準地価、および実際の取引事例を確認し、乙土地の適正な市場価格を算出します。\n著しく安価な場合は「みなし贈与」等の税務リスクも考慮する必要があるためです。\n\n公図や地積測量図を確認し、甲土地と乙土地の境界が確定しているか、また建物や樹木、工作物の越境がないかを確認します。\n\n3つ目は、都市計画法・建築基準法上の制限調査です。\nAさんは「一体での事務所新設や二世帯住宅の建築」を希望されています。\n乙土地は第一種住居地域、建蔽率60％、容積率200％ですが、甲・乙土地を合筆または一体利用した場合の建築可能面積を算出します。\n\n北側の市道8mと東側の市道4mへの接道状況を確認し、建築基準法上の道路種別や、セットバックの要否、角地緩和の適用の有無を調査します。\n\n最後に、過去の利用状況を確認し、解体・建築時に予期せぬ費用が発生するリスクがないかを確認します。\n\n---\n\nAさんが乙土地の購入を進めるにあたっては、非常に魅力的な話である反面、法的なリスクが複数存在するため、慎重に進めるよう、「Cさんの意志能力の確認」「抵当権の状況確認と抹消手続き」「適正価格による取引の実施」「専門家の介在（直接取引の回避）」の4点についてアドバイスいたします。\n\n---\n\n最も重要なのは、Cさんの認知症の疑いに対する対応です。\n徘徊や同じ話を繰り返すなどの症状が見られ、すでに亡くなっている母親からの指示で相談に来たという発言もあることから、Cさんには契約に必要な意思能力が欠けている可能性があります。\nそのまま直接売買契約を結んでしまうと、後になって契約が無効となるリスクが高いため、まずは医師の診断を促す必要があります。\nその上で、意思能力が不十分であると判断された場合は、家庭裁判所に申し立てて「法定後見制度（成年後見人・保佐人・補助人）」を利用し、選任された後見人等と契約交渉を進めるべきだとアドバイスします。\n\n---\n\n登記簿上にある「かなり前に設定された4,000万円の抵当権」について、実態を調査する必要があります。\nすでに借入金は完済されているものの抵当権の抹消登記が行われていない「休眠抵当権」である可能性もありますが、万が一残債がある場合は購入後に競売にかけられるリスクがあります。\n売買契約においては、引き渡し時までに（あるいは引き渡しと同時に）確実に抵当権が抹消されることを条件とするよう助言します。\n\n---\n\n希望価格の5,000万円が相場より安いという点にも注意が必要です。\n著しく低い価額で取引を行った場合、税務上「みなし贈与」としてAさんに贈与税が課税される恐れがあります。\nまた、Cさんには亡き兄Dさんの子ども（甥）が2人おり、将来Cさんが亡くなった際に法定相続人となります。不当に安く買い叩いたとみなされると、後日この相続人たちとトラブルになるリスクがあります。\nそのため、不動産鑑定士や宅地建物取引業者に依頼して乙土地の適正な時価を算出し、相場に基づいた公正な価格で取引を行うべきです。\n\n---\n\nこれら複雑な権利関係や意思能力の問題があるため、Aさん個人が直接Cさんと売買契約を締結することは避けるべきです。\n宅地建物取引業者に仲介に入ってもらうか、弁護士や司法書士などの専門家を交えて、安全かつ確実なスキームで取引を進めるよう強くお勧めします。\n\n---\n\nCさんと契約した時点で、すでにCさんが重度の認知症と診断されていた場合、その売買契約は法律上「無効」となります。\n\n民法では、「意思能力」を欠く状態で行われた行為は、無効であると定められています。重度の認知症と診断されている状態であれば、この意思能力がなかったとみなされる可能性が極めて高くなります。\n契約が無効となった場合、最初から契約は存在しなかったことになります。\nしたがって、仮にAさんがすでに代金を支払い、所有権移転登記まで済ませていたとしても、乙土地の所有権はAさんに移転しません。\nAさんは不動産を返還し、Cさん側は受け取った代金を返還する義務（不当利得返還義務）が生じますが、もしCさんが代金をすでに使ってしまっていたり紛失したりしていた場合、資金の回収をめぐって深刻なトラブルに発展する大きなリスクがあります。\n\n---\n\n成年後見制度の活用が考えられます。\n家庭裁判所により成年後見人が選任され、その後見人が本人の利益を考慮して売却を行う場合、適法に売買契約を締結できます。\n\n---\n\n今回の乙土地と建物はCさんの「住まい」ですので、成年後見人がこれを売却するには、家庭裁判所の許可を得なければなりません。\n裁判所が「生活費の工面」という売却理由の妥当性や売却価格の適正さを審査し、許可が下りることで、初めて有効に売買を行うことができます。\n\nAさんが強引に直接契約を進めることは、将来的にCさんの親族から契約無効を訴えられる可能性が非常に高く、極めて危険であることをアドバイスします。\n\n---\n\nＡさんが乙土地を購入する主なメリットは、「土地の一体利用による建築の自由度と効率の向上」「事業・生活環境の充実と将来への備え」「資産価値の向上」です。\n\n---\n\n合計約718㎡の広大な敷地となることで、大型の二世帯住宅と事務所を理想的な配置で建設できるようになり、土地のポテンシャルを最大限に引き出せます。\nまた、北側の幅員8mの広い市道に接することで、事務所への大型車両の出入りが容易になり、事業の利便性と資産価値が向上します。\nさらに、角地緩和により、指定60%から70%へ10%緩和される可能性や、幅員8mの前面道路に接することで、容積率制限をより有利に受けられ、大規模な建築が可能となります。\n\n---\n\nAさんの現在の家族構成や仕事の状況に合致したメリットがあります。\n現在、Aさん夫妻、長男夫妻、孫2人の計6人で暮らしていますが、敷地が倍増することで、プライバシーを確保しつつゆとりのある二世帯住宅を建築できます。\n経営する建設業の事務所を自宅敷地内に新設することで、職住接近による業務効率の向上や、法人の経費（地代家賃等）としての活用も検討できます。\n広い敷地を活かし、来客用や工事車両用の駐車場、あるいは孫たちが遊べる庭を十分に確保することが可能になります。\n\n---\n\n隣地を買い増して一体化することで、土地の形状が整い、単独の土地として所有している時よりも平米単価（坪単価）としての市場価値が高まることが期待できます。\n仮に乙土地を第三者が購入し、コンビニのような商業施設や高い建物が建った場合、住環境が悪化する恐れがあります。Aさんが購入することで、自らの住環境を将来にわたって守ることができます。\n\n---\n\n司法書士。\n乙土地・乙建物の売買に伴う所有権移転登記の手続きを依頼します。\nまた、登記簿上にある4,000万円の抵当権抹消手続きや、成年後見制度の申し立てに関する書類作成・手続きのサポートを依頼します。\n\n税理士。\n売却価格が相場より安い（5,000万円）ことによる「みなし贈与」の判定や、Aさんが乙土地を購入した後の税務申告についてアドバイスを仰ぎます。\nまた、将来的な二世帯住宅建築時における小規模宅地等の特例の適用可否など、相続税対策の試算を依頼します。\n\n宅地建物取引業者。\nCさんとの直接取引を避け、安全に取引を進めるための媒介（仲介）を依頼します。\n物件の適正な時価の調査や、重要事項説明、売買契約書の作成などの実務を担ってもらいます。\n\n不動産鑑定士。\n親族外の第三者との取引において、価格の妥当性を客観的に証明する必要がある場合（特に後見人が選任され、裁判所の許可を得る際など）、適正な時価の鑑定評価を依頼します。\n\n弁護士。\nCさんの意思能力をめぐる法的判断や、将来的にDさんの子（甥）などの親族から契約の無効を訴えられるといったトラブルを防ぐための法的助言を依頼します。\n\n医師（精神科医等）。\nCさんの現在の認知機能の状態を診断し、意思能力の有無や、成年後見制度の申し立てに必要となる診断書の作成を依頼します。"}]}, {"id": "2026-02-07-part1", "title": "2025年度第3回 Part1（2026年2月7日）", "setsurei": "【事業承継について】\n\n　Ａさんと弟Ｅさんは、自分たちの年齢のことも考え、近々勇退するつもりでいる。現在、Ｘ社の株式は、Ａさんが49％、弟Ｅさんが51％保有している。\n\n　大手家具メーカーに勤務していた甥Ｆさん（40歳、弟Ｅさんの子）は、５年前にＸ社に入社し、現在はオフィス部門の責任者を務めており、取引先・従業員からの信頼は厚い。Ａさんと弟Ｅさんは、Ｆさんを後継者に考えており、Ｆさんにもその自覚がある。なお、弟Ｅさんは自身の持株について、事業承継税制（特例措置）を使った贈与を考えており、特例承継計画は既に県知事に提出している。\n\n　Ａさんには長女Ｃさん（37歳）と二女Ｄさん（34歳）がいるが、いずれもＸ社の経営にはまったく関心がない。Ａさんは、２人の子はＸ社の事業承継とは関係がないと思っているが、相応の資産は残してやりたいと思っている。そのこともあり、Ａさんは、甥Ｆさんを後継者とすることには異論はないが、自身の財産の大部分を占めるＸ社株式のすべてを甥Ｆさんに無償で贈与することには抵抗を感じている。\n\n　Ａさんは、所有しているＸ社株式のすべてをＸ社の余剰資金を使って金庫株としてＸ社が買い取ることにすれば、甥Ｆさんが経営に必要な議決権割合を確保できるのではないかと思っている。あるいは、事業承継税制（特例措置）により持株の一部を甥Ｆさんに贈与することも考えているが、これらの方法についてアドバイスを求めている。\n\n【資産承継について】\n\n　Ａさんの自宅が建っている甲土地（地積800㎡）は、父親の相続により、Ａさんと弟Ｅさんがそれぞれ各２分の１の共有持分で取得したものである。現在、甲土地上にはＡさんの自宅と弟Ｅさんの自宅が建っており、Ａさんは甲土地の共有状態を将来の相続を見据えて解消しておきたいと考えている。\n\n【Ａさんの所有財産の概要】（相続税評価額、土地は小規模宅地等の評価減適用前）\n\n⒈ 現預金 ： 1億円\n⒉ X社株式 ： 2億9,400万円\n⒊ 自宅\n　①土地(400㎡) ： 8,000万円（持分２分の１の評価額）\n　②建物(築15年) ： 2,000万円\n⒋ X社本社兼工房土地(600㎡) ： 1億1,000万円\n⒌ 月極駐車場(400㎡) ： 5,000万円\n　合計 ： 6億5,400万円\n\n※Ａさんの相続に係る相続税額は、約２億円（配偶者の税額軽減・小規模宅地等の評価減適用前）と見積もられている。\n\n※Ｘ社は本社土地の無償返還に関する届出書をＡさんと連名で税務署に提出し、Ａさんに通常の地代を支払っている。\n\n【Ｘ社の概要】\n\n※Ｘ社株式は譲渡制限株式である。\n\n【Ａさんの推定相続人】\n妻Ｂさん （65歳）：専業主婦。Ａさんと自宅で同居している。\n長女Ｃさん（37歳）：専業主婦。これまでＸ社の経営に関与したことはない。会社員の夫と子の３人で夫所有の持家に住んでいる。\n二女Ｄさん（34歳）：会社員。これまでＸ社の経営に関与したことはない。Ａさんと自宅で同居している。\n\n（注）設例に関し、詳細な計算を行う必要はない。", "questions": [{"main": "設例をじっくり読んだと思いますが、Aさんの相談内容と問題点について項目だけで構いませんので全てあげてください。", "followups": ["それでは、今あげた問題点を解決するためにどのような提案・方策が考えられますか？", "「事業承継」についてですが、Aさんが保有するX社株式49%については、具体的にどうアドバイスしますか？", "今、金庫株の話が出ましたが、実行する際の注意点は何ですか？", "Ａさんは甲土地の共有状態を将来の相続を見据えて解消しておきたいと考えていますが、どのような提案をしますか？", "後継者のFさんと、経営に関与しない娘さんたちの間で不公平感が出ませんか？", "相続税が約2億円と高額ですが、納税資金はどう確保しますか？", "最後に、FPが守るべき職業倫理を６つあげてください。", "どれもFPにとっては大事なことだと思いますが、今回のケースでは特にどれを重視しますか？"], "model": "Aさんの相談内容と問題点は大きく分けて4つあると認識しています。\n\n第1に事業承継です。\n後継者である甥Fさんへの株式承継方法、議決権の安定確保、事業承継税制の活用、自己株式取得の可否が問題となります。\n\n第2に資産承継です。\n自宅敷地である甲土地が弟との共有となっているため、将来の相続を見据えた共有解消が課題です。\n\n第3に相続対策です。\n相続税が約2億円と高額なので納税資金の確保と相続税の軽減対策が必要です。\n\n第4に円滑な遺産分割です。\n実子は会社経営に関与していない一方、相応の財産を残したいという意向があり、公平性への配慮が必要です。\n\n---\n\nAさんの「娘に財産を残したい」という意向と「経営権の集中」を両立させるため、「事業承継税制（特例措置）」と「金庫株の活用」の併用を提案します。\n\n具体的には、Fさんの議決権確保に必要な分は贈与税の全額猶予が受けられる「特例措置」を使って贈与します。\n弟Ｅさんはすでに特例承継計画を提出しているため、Ａさんについても制度要件を満たすか確認したうえで活用を検討します。\n\n残りはAさんの相続発生後に「金庫株特例（みなし配当課税の特例）」を活用して、X社に買い取らせるのがベストだと考えます。\n\n---\n\n主に3点あります。\n\n1つ目は税務面です。生前に実行すると「みなし配当」として高率な総合課税になりますが、相続後3年10ヶ月以内であれば約20%の分離課税で済みます。\n\n2つ目は法務面です。会社法上の「分配可能額」の範囲内である必要があり、株主総会決議や財務安全性への配慮が求められます。X社は9億円あるため問題ありません。\n\n3つ目は議決権への影響です。自社株買いによりAさんの株が消却または金庫株となれば、相対的に弟EさんやFさんの議決権割合が高まるため、事前のシミュレーションが不可欠です。\n\n---\n\n甲土地については、Ａさんと弟Ｅさんが２分の１ずつ共有しており、将来の相続において権利関係が複雑化し、共有者が増加するリスクがあるため、持分に応じた現物分割を行ない、各々が単独所有となるように提案します。\n\nその際、共有物の分割が持分に応じておこなわれ、分筆後の土地の時価と面積が持分割合と一致する場合は譲渡所得税も贈与税もかかりません。\n\n---\n\n基本方針は「経営権の集中」と「相続人への公平性確保」の両立です。\n対策として、経営承継円滑化法の「遺留分に関する民法特例」を活用することで、Fさんの経営権を法的に安定させつつ、娘さんたちには、現預金や不動産、生命保険金などの財産を承継させ、財産的公平感を確保します。\n\n具体的には、AさんからFさんに贈与する株式について、娘さんたち（推定相続人）全員の合意を得て、遺留分を算定する基礎財産から除外する「除外合意」や、贈与時の時価で遺留分の額を固定する「固定合意」などを検討します。\n\nさらに、Aさんの想いを伝えるために「遺言書」を作成し、付言事項で家族への感謝と会社存続の重要性を丁寧に説くようアドバイスします。\n\n---\n\n大きく3つの柱で対策します。\n\n1つ目は、事業承継税制を活用し、株式部分の税負担自体を軽減します。\n\n2つ目は、先ほどの金庫株の活用です。相続人が相続した株式を会社に売却し、現金化します。\n\n3つ目は、生命保険の活用です。現預金の一部を保険に切り替え、非課税枠を活用しつつ、相続発生時に即座に現金を受け取れる体制を整えます。\n\n---\n\n顧客利益の優先、守秘義務の遵守、顧客に対する説明義務、インフォームドコンセント、コンプライアンスの徹底、FP自身の能力の啓発です。\n\n---\n\n今回のケースでは、インフォームドコンセントを重視します。\n\nAさんは「金庫株にすれば議決権が確保できるのではないか」といった独自の考えを持っていますが、それが税務的・法務的に見て最善とは限りません。\nFPは客観的な分析に基づいた複数の選択肢を提示し、Aさん自身が最終的な意思決定を行えるようサポートし、明確な合意を得た上で進める必要があるため、必ず同意を得て提案することを重視します。"}]}, {"id": "2025-09-27-part1", "title": "2025年度第2回 Part1（2025年9月27日）", "setsurei": "　Ａさん（71歳）は、食料品製造業を営むＸ株式会社（非上場企業）の創業社長である。Ｘ社は、Ａさんが40年前に設立して以来、ロングセラー商品を中心に業容を拡大させてきた。しかし、近年はヒット商品に恵まれず、売上が減少し、前期は創業以来初めて赤字に転落した。今期も業績が厳しく、２期連続での赤字決算となる見込みである。過去の内部留保が多く、また赤字額が少ないため、今のところ経営に対する影響は出ていない。\n\n【事業承継について】\n　Ａさんは、新たに開発した商品の発売を機に社長職を辞し、Ｘ社を去る決意をした。今後は、希望退職者を募り、人員の削減を図るなど会社の体質を強化したうえで、専務取締役の長男Ｃさん（44歳）に事業を承継し、長男Ｃさんを含む若手社員にＸ社を託すつもりである。大手食品メーカーでの勤務を経てＸ社に入社した長男Ｃさんは、10年前に専務取締役に就任し、Ａさんを補佐してきた。取引先・従業員からの信頼は厚く、後継者としての資質に問題はない。\n\n　Ｘ社株式の承継方法について、Ａさんは贈与による移転を検討しているが、現時点では明確な考えはなく、長男Ｃさんと相談して実行する予定である。\n\n　Ａさんは、今期も赤字が見込まれるため、Ｘ社が黒字に転ずるまでは、毎年行っていた配当をゼロにしたいと思っているが、長男ＣさんにＸ社株式を移転するにあたり、Ｘ社株式の評価上、何か問題となることはないか知りたいと思っている。\n\n【資産承継について】\n　会社員の二男Ｄさん（39歳）は、妻と子の３人で都内の賃貸マンションで暮らしている。二男Ｄさんは、以前から長男Ｃさんと折り合いが悪く、Ａさんの相続が発生した場合、相当額を相続できなければ納得できないと考えている。\n\n　このままでは、遺産分割において争いが起こり、申告期限までに分割ができないおそれがあるため、Ａさんはどのように資産承継をすればよいか頭を悩ませている。\n\n【Ａさんの家族構成（推定相続人）】\n妻Ｂさん（68歳）：専業主婦。Ａさん、長男Ｃさん家族と二世帯住宅に居住している。\n長男Ｃさん（44歳）：Ｘ社専務取締役。妻と子２人（12歳・９歳）の４人で二世帯住宅に居住している。\n二男Ｄさん（39歳）：会社員。妻と子（７歳）の３人で賃貸マンションに居住している。\n\n【Ａさんの所有財産の概要】（相続税評価額、土地は小規模宅地等の評価減適用前）\n\n⒈ 現預金 ： 1億円（役員退職金は考慮していない）\n⒉ X社株式 ： 2億円\n⒊ 自宅\n　①土地(360㎡) ： 1億5,000万円\n　②建物(二世帯住宅) ： 5,000万円\n⒋ X社本社土地(400㎡) ： 1億円\n⒌ X社本社建物 ： 5,000万円（年間家賃800万円）\n　合計 ： 6億5,000万円\n\n※Ａさんの相続に係る相続税額は、約１億9,500万円（配偶者の税額軽減・小規模宅地等の評価減適用前）と見積もられている。\n\n【Ｘ社の概要】\n資本金：5,000万円　会社規模：大会社　従業員数：120人　配当：毎期25円／株\n売上高：21億円　経常利益：▲1,000万円　余剰資金：３億円\n株主構成（発行済株式総数10万株）：Ａさん100％\n株式の相続税評価額：類似業種比準価額2,000円／株、純資産価額5,000円／株\n今期の損失金額は約300万円と、赤字幅の縮小が見込まれている。\n\n（注）設例に関し、詳細な計算を行う必要はない。", "questions": [{"main": "設例をじっくり読んだと思いますが、Aさんの相談内容と問題点について項目だけで構いませんので全てあげてください。", "followups": ["それでは、今あげた問題点を解決するためにどのような提案・方策が考えられますか？", "X社株式の承継方法について、どのような方法がありますか？", "事業承継税制について教えてください。", "事業承継税制の特例措置と一般措置の違いを説明してください。", "X社が黒字に転ずるまでは、配当をゼロにしたいと思っていますが、株式を移転するにあたり、X社株式の評価上、何か問題となることはありませんか？", "比準要素数1の会社について教えてください。", "比準要素数1の会社に該当すると株価が高くなるのはどうしてですか？", "資産承継についてはどのようなことをアドバイスしますか？", "生前贈与の活用はどのように提案しますか？", "遺留分に関する民法の特例について説明してください。", "遺留分に関する民法の特例の適用を受けるために必要な、手続について教えてください。", "申告期限までに分割が行われない場合、相続税の申告はどうしたらよいですか？", "申告期限までに分割が行われない場合のデメリットを教えてください。", "最後に、FPが守るべき職業倫理を６つあげてください。", "どれもFPにとっては大事なことだと思いますが、今回のケースでは特にどれを重視しますか？"], "model": "相談内容として\n\n・X社株式の承継方法について。\n・配当をゼロにしたいと思っているが株式を移転するにあたり、X社株式の評価上、何か問題となることはないのか。\n・どのように資産承継をすればよいか。\n\n問題点は、\n\n・相続税が高額になるので相続税の軽減。\n・納税資金の確保が必要です。\n\n---\n\n事業承継税制を活用する方法があります。\n\n---\n\n事業承継税制とは、会社の後継者が先代経営者などから自社株式などを取得した場合に、一定の要件を満たしているときは、贈与税や相続税の納税を猶予し、後継者が次の後継者に事業承継できた場合などには、相続税や贈与税が免除になる制度です。\n\n---\n\n特例措置は2018年1月1日から2027年12月31日までの10年間限定で、特例措置を希望する場合は、2026年3月31日までに特例承継計画を作成し、都道府県知事に提出しなければなりません。\n\n一般措置では、納税猶予の対象とされる非上場株式などが総株式数の最大3分の2までと制限されていましたが、特例措置では撤廃されています。\n\nまた、特例措置では相続にかかる納税猶予割合も、80%から100%へと引き上げられたり、複数の株主から最大3人の後継者へ承継できたり、雇用確保要件も弾力化されています。\n\n---\n\n問題点として、自社株式の評価額が高くなることがあります。\n赤字が続いている時に配当をゼロにしてしまうと、資産や売り上げが大きくても比準要素1の会社に該当することがあり、自社株式の評価額が高くなることがあります。\n\n---\n\n比準要素数1の会社ですが、類似業種比準方式では、１株当たりの配当金額、１株当たりの利益金額、１株当たりの純資産価額の３つの比準要素を使います。\n\n比準要素数１の会社とは、3つの比準要素のうち、評価直前期末の要素のいずれか2つがゼロであり、かつ、評価直前々期末の要素のいずれか2つ以上がゼロである会社のことです。\n\nX社は2期連続での赤字決算となる見込みなので、黒字に転ずるまで配当をゼロにしてしまうと比準要素数1の会社に該当する可能性があります。\n\n---\n\nX社は大会社ですが、比準要素数１の会社に該当すると、会社の規模にかかわらず、純資産価額方式による評価、又は選択により併用方式において、類似業種比準価額のＬの割合を0.25として評価することになります。\nそのため純資産価額の割合が大きくなり、一般的に株価が高く算出されます。\n\n---\n\n遺言書を作成することや、遺留分に関する民法の特例、金庫株特例、生前贈与の活用を検討するようにアドバイスします。\n\n---\n\n生前贈与の活用には、歴年贈与、教育資金、結婚・子育て資金贈与、住宅取得資金贈与などがあげられます。\n今回のケースでは、後継者である長男Cさんが遺産の多くを取得するため二男Dさんの遺留分を侵害したり、不満が出る可能性があります。\n教育資金の一括贈与や住宅取得資金贈与などを積極的に行うことを提案します。\n\n---\n\n事業承継による相続について、法定相続人の合意があれば、遺留分を減らせるという事です。\n後継者に自社株式を集中して承継させようとしても、遺留分を侵害された相続人から遺留分に相当する財産の返還を求められた際、自社株式が分散してしまったり、資金不足になり業績が悪化し、廃業に追い込まれるということを避けるための制度です。\n\n---\n\n遺留分に関する民法の特例の適用を受ける手続は、経営者の推定相続人全員と後継者が合意し、合意書を作成します。\n\n次に、合意をした日から１カ月以内に「遺留分に関する民法の特例に係る確認申請書」に必要書類を添付して、経済産業大臣へ申請します。\n\n申請後に確認書の交付を受け、確認を受けた日から１カ月以内に家庭裁判所に申立てを行い、家庭裁判所の許可を得ます。\n\n---\n\n遺産分割が相続税の申告期限に間に合わないときは、申告期限までに一度、法定相続分で相続したことにして相続税を申告・納税し、正式に遺産分割ができたときに改めて税務署に対して申告します。\n\n---\n\n配偶者の税額軽減や小規模宅地等の特例など、税額を軽減する特例が適用できないので、相続税が高くなってしまいます。\n\nただし、未分割申告をするときに申告期限後3年以内の分割見込書を添付すると、配偶者の税額軽減と小規模宅地等の特例は適用できるようになります。\n手続きは、遺産分割後4ヶ月以内に更正の請求を行い申告を修正することで、納めすぎた税金が還付されます。\n\n---\n\n顧客利益の優先、守秘義務の遵守、顧客に対する説明義務、インフォームドコンセント、コンプライアンスの徹底、FP自身の能力の啓発です。\n\n---\n\n今回のケースでは、インフォームドコンセントを重視します。\n\nAさんは事業承継について後継者は決まっているものの具体的な方法は決まっておらず、資産承継に関しても兄弟間で折り合いが悪いということなので、一つ一つ制度の内容や適用効果を説明することだけでなく、ご家族と一緒に理解状況を確認しながら、寄り添ったわかりやすく丁寧な説明を行い、必ず同意を得て提案することを重視します。"}]}, {"id": "2025-09-28-part1", "title": "2025年度第2回 Part1（2025年9月28日）", "setsurei": "　Ａさんは、Ｘ株式会社（非上場会社・機械部品製造業）の代表取締役社長であったが、先月病気により70歳で急逝した。大都市圏に所在するＸ社は、Ａさんが40年前に設立した会社であり、その技術力は取引先から高く評価され、業績は堅調に推移している。Ｘ社の余剰資金は２億円以上あり、経営は安定している。\n\n【事業承継について】\n\n　長男Ｃさん（45歳）は、１年前にＸ社の取締役に就任し、実質的に経営を担ってきた。その経営能力は非常に高く、後継者としての資質に問題はない。妻Ｂさん（70歳）は、長年、取締役として経理業務を担当し、Ａさんを補佐してきたが、引き続き、取締役として長男Ｃさんをサポートしていきたいと考えている。\n\n　Ａさんから長男Ｃさんへの事業承継は既定路線であり、家族内でも共有されていたが、承継を検討し始めた矢先に相続が発生したため、長男Ｃさんは、Ｘ社株式をどのように承継するべきか悩んでいる。\n\n【資産承継について】\n\n　Ａさんは、遺言書を準備していなかった。妻Ｂさんが地方都市に暮らす二男Ｄさん（43歳）に意向を聞いたところ、二男Ｄさんから「親父が急死して、母さんや兄貴が大変なことは理解している。俺はＸ社の経営に参画することはないが、息子として親父の財産の一部をもらう権利はあると思っている」と言われた。長男Ｃさんと二男Ｄさんの関係は良好であるものの、妻Ｂさんは、兄弟間で相続財産の偏りが生じることに一抹の不安を感じている。\n\n　妻Ｂさんの健康状態は良好であるが、同い年であったＡさんが急逝したこともあり、自分に万一のことがないとも言い切れないと思っている。そのため、この先の生活を考えると相応の財産は確保しておきたいが、財産を多く相続すると自身の相続が発生した際に多額の相続税が生じるのではないかと不安を抱いている。二男Ｄさんにも配慮したいと考えており、どのように遺産分割をすべきか頭を悩ませている。\n\n【Ａさんの相続財産の概要】（相続税評価額、土地は小規模宅地等の評価減適用前）\n\n⒈ 現預金 ： 3,000万円\n⒉ 死亡退職金 ： 3,500万円（妻Ｂさんに支給）\n⒊ X社株式 ： 2億4,000万円\n⒋ 自宅\n　①土地(200m²) ： 7,000万円\n　②建物 ： 2,000万円\n⒌ X社本社土地(500㎡) ： 1億円（無償変換方式・通常の地代にて賃貸）\n⒍ 月極駐車場(250㎡) ： 3,000万円（アスファルト敷き）\n　合計 ： 5億2,500万円\n\n※Ａさんの相続に係る相続税額は、約１億4,100万円（配偶者の税額軽減・小規模宅地等の評価減適用前）と見積もられている。\n\n※Ａさんは、契約者（＝保険料負担者）・被保険者をＡさん、死亡保険金受取人を妻Ｂさんとする生命保険（死亡保険金1,500万円）に加入していた。\n\n【Ｘ社の概要】\n資本金：1,000万円　会社規模：大会社　従業員数：90人　配当：毎期100円／株\n売上高：16億円　経常利益：4,000万円　純資産：４億円\n株主構成（発行済株式総数２万株）：Ａさん80％、妻Ｂさん10％、長男Ｃさん10％\n株式の相続税評価額：類似業種比準価額15,000円／株、純資産価額20,000円／株\n\n【Ａさんの家族構成（法定相続人）】\n妻Ｂさん（70歳）：Ｘ社の取締役。Ａさんと自宅で同居していた。\n長男Ｃさん（45歳）：Ｘ社の取締役。妻と子２人の４人で持家に居住している。\n二男Ｄさん（43歳）：会社員。妻と子２人の４人で社宅に居住している。\n\n（注）設例に関し、詳細な計算を行う必要はない。", "questions": [{"main": "設例をじっくり読んだと思いますが、Aさんの相談内容と問題点について項目だけで構いませんので全てあげてください。", "followups": ["それでは、今あげた問題点を解決するためにどのような提案・方策が考えられますか？", "事業承継税制を相続発生後に適用するための主な要件を説明してください。", "事業承継税制の適用に際して注意する点はありますか？", "円滑な遺産分割を行うためにはどのような提案・方策が考えられますか？", "妻Ｂさんが財産を多く相続すると、自身の相続が発生した際に多額の相続税が生じるのではないかと不安を抱いていますが、問題ありませんか？", "相次相続控除について説明してください。", "死亡退職金は相続税の課税対象ですが、非課税枠が設けられています。\n非課税限度額を説明してください。", "株価引き下げ対策として、死亡退職金の支給は有効ですか？", "小規模宅地の特例の活用はどのように提案しますか？", "最後に、FPが守るべき職業倫理を６つあげてください。", "どれもFPにとっては大事なことだと思いますが、今回のケースでは特にどれを重視しますか？"], "model": "相談内容として\n\n・X社株式をどのように承継すべきか。\n・兄弟間で相続財産の偏りが生じること。\n・妻Ｂさんが財産を多く相続すると自身の相続が発生した際に多額の相続税が生じるのではないかと不安を抱いていることです。\n\n問題点は、\n\n・相続税が高額になるので相続税の軽減。\n・納税資金の確保。\n・円滑な遺産分割を行うための対策が必要です。\n\n---\n\n納税資金の準備と相続税の軽減対策ですが、事業承継税制の活用、金庫株の活用、小規模宅地の特例の活用などがあげられます。\n\n---\n\n相続が発生した日の翌日から8か月以内に都道府県庁へ経営承継円滑化法に基づく認定申請が必要です。（ただし、相続が発生した日から5か月を経過する、認定申請基準日以降でないと申請できません）\n\n後継者の要件として、相続開始の直前において役員であり、相続開始から5ヶ⽉後に代表者でなければいけません。（先代経営者が70歳未満で死亡した場合、⼜は相続発⽣前に確認を受けた特例承継計画に特例後継者として記載されている場合を除きます）\n\n相続の開始があったことを知った⽇の翌⽇から10ヶ⽉以内に、都道府県知事の認定書を提出し、相続税の申告を行います。\nまた、納税が猶予される相続税、及び利⼦税に⾒合う担保を税務署に提供する必要があります。\n\n---\n\n事業承継税制を相続税で適用した後に、納税資金の確保や、二男Dさんからの遺留分請求資金を確保するために、金庫株を実行すると取消事由に該当してしまいます。\n事前に金庫株実行を検討している場合には、一部の株式に事業承継税制を適用しないことを検討します。\n\n---\n\n今回のケースでは、後継者である長男Cさんが遺産の多くを取得するため二男Dさんの遺留分を侵害したり、不満が出る可能性があります。\n\n二男Dさんは、X社の経営に参画することはないし、不動産を欲しいとも思わないとの意向があるので、金融資産を中心に相続したいのではないかと考えます。\n\n金庫株を活用しX社株式を相続後、X社に株式の一部を買い取ってもらうことで、現金を受け取ることが可能になり、金融資産を多く相続することで、ある程度均等な相続が可能になります。\n\n---\n\n一次相続の際に最も有利な遺産分割をしたと思っていても、二次相続も合わせて考えれば、かえって税負担が大きくなってしまう可能性があります。\n遺言書の作成や生命保険の活用、相次相続控除など、専門家も交え、二次相続まで見越した遺産分割を行うことが重要です。\n\n---\n\n相次相続控除とは、10年以内に相次相続が発生した場合に相続税の負担が過重になるのを軽減する特例です。\n\nただし、相次相続控除の適用を受けるためには、適用を受ける人が被相続人の相続人であること、前回の相続開始から今回の相続の開始まで10年以内であること、前回の相続で今回の相続の被相続人が相続財産を取得し、相続税が課税されていること、この3つの要件すべてに当てはまる必要があります。\n\n---\n\n非課税限度額は、500万円×法定相続人の数です。\n今回のケースでは、法定相続人が3人(配偶者、長男、二男)なので非課税限度額は、500万円×3人=1,500万円となります。\n\n---\n\n死亡退職金は自社株の純資産価額方式の計算上は負債となるため、純資産価額方式又は併用方式を適用する場合には自社株の評価額は下がります。\n\nX社の会社規模は大会社です。\n大会社の場合、原則として、類似業種比準方式により評価します。\n類似業種比準方式においては死亡時の年度ではなく、その直前期末の数値で比較することになります。\nそのため、株価には影響が出ず株価を引き下げられないので、相続税対策としては効果がありません。\n\n---\n\n一定の条件を満たすことで土地の相続税評価額を、特定居住用は330㎡、事業用は400㎡まで80％軽減され、貸付事業用は200㎡まで50％軽減されます。\n\n今回のケースでは、後継者である長男CさんがX社本社土地を相続すると、自宅土地200㎡を特定居住用宅地として、X社本社土地500㎡のうち400㎡までを特定同族会社事業用宅地等として、80％軽減することができます。\n\nアスファルト敷きの月極駐車場にも適用できますが、選択する宅地に貸付事業用宅地等を含む場合、貸付事業用宅地等の基準で換算して全体で限度面積200㎡以下に調整する計算が必要です。\n\n---\n\n顧客利益の優先、守秘義務の遵守、顧客に対する説明義務、インフォームドコンセント、コンプライアンスの徹底、FP自身の能力の啓発です。\n\n---\n\n今回のケースでは、インフォームドコンセントを重視します。\n\nAさんは病気で急逝され、X社にとってもご家族にとっても不安なことが多いと思います。\nX社の経営を安定して続けていく必要がある長男Cさんと、X社経営に関心のない二男Dさんが納得できるように、ご家族一緒に理解状況を確認しながら、寄り添ったわかりやすく丁寧な説明を行い、必ず同意を得て提案することを重視します。"}]}, {"id": "2025-09-28-part2", "title": "2025年度第2回 Part2（2025年9月28日）", "setsurei": "　先日、長男Ｃさんは、Ａさん夫妻のもとを訪れ、「Ｅは、何とか志望する医学部に合格する見込みがでてきた。しかし、私の貯蓄と収入では学費を全額賄うことはできそうにない。初年度に500万円、２年度目以降５年間、毎年400万円ずつ不足する見込みであり、資金を援助してもらえないだろうか」と相談を持ちかけた。Ａさんと妻Ｂさんは話し合い、「Ｅが医師になる夢を叶えるためなら、できるだけの援助をしよう。また、この機会にそろそろ将来の相続について計画をたててみよう」ということになった。\n\n【Ａさんの相続財産の概要】（相続税評価額、土地は小規模宅地等の評価減適用前）\n\n⒈ 現預金等の金融資産 ： 5,000万円（借入金はない）\n⒉ 自宅\n　①甲土地(200m²) ： 3,000万円\n　②甲建物(130㎡) ： 500万円\n⒊ 賃貸マンション（３階建て12室の一棟）\n　①乙土地(300m²) ： 4,000万円（貸家建付地評価）\n　②乙建物 ： 1,200万円（貸家評価）\n⒋ 丙土地(1,000㎡) ： 100万円\n\n※丙土地は、父親から相続した郷里（三大都市圏外）にある更地の宅地である。\n\n　なお、丙土地は、都市計画区域外に所在しており、固定資産税と草刈り等の管理費が毎年10万円程度かかっている。Ａさんは、活用方法がなく、維持管理に手間と費用がかかる丙土地を手放したいと思っているが、地元の不動産会社の話では、購入希望者は見込めないとのことである。また、地元自治体に寄附の相談もしてみたが、引き取ることはできないと回答された。Ａさんは、有効活用のできない丙土地の問題を自分の代で解消したいと思っている。\n\n【Ａさんの計画】\n\n　Ａさんは、長男Ｃさんに、現金（初年度納入金の不足額500万円）と、賃貸マンション（乙土地・乙建物）の持分の２分の１を贈与し、その賃貸収入で２年度目以降の不足額を補塡させようと考えている。また、丙土地については、不動産引取サービスを行っているⅩ社から、引取料100万円を支払えば引き取るとの提案を受けており、検討したいと考えている。\n\n　Ａさんは、孫Ｅさんの学費支援方法や丙土地の処分について、自身の計画に何か問題はないか、ＦＰであるあなたに相談することにした。\n\n(FPへの質問事項)\n\n1. Aさんに対して、最適なアドバイスをするためには、示された情報のほかに、どのような情報が必要ですか。以下の①および②に整理して説明してください。\n　①Aさんから直接聞いて確認する情報\n　②FPであるあなた自身が調べて確認する情報\n2. 孫Ｅさんの学費支援として、Ａさんの考える計画は妥当ですか。問題があるとしたら、代わりにどのような方法を提案しますか。\n3. 丙土地をⅩ社の提案により処分する前に、他に確認すべきことはありますか。Ⅹ社の提案により処分する場合、どのようなアドバイスをしますか。\n4. 本事案に関与する専門職業家にはどのような方々がいますか。\n\n(注)設例に関し、詳細な計算を行う必要はない。", "questions": [{"main": "Aさんに対して、最適なアドバイスをするためには、示された情報のほかに、どのような情報が必要ですか？\n　①Aさんから直接聞いて確認する情報は、どのようなことですか？", "followups": ["②FPであるあなた自身が調べて確認する情報は、どのようなことですか？", "孫Ｅさんの学費支援として、Ａさんの考える計画は妥当ですか？\n問題があるとしたら、代わりにどのような方法を提案しますか？", "問題はありませんか？", "どのような方法を提案しますか？", "他に問題はありませんか？", "どのような提案をしますか？", "丙土地をⅩ社の提案により処分する前に、他に確認すべきことはありますか？", "相続土地国庫帰属制度では、相続した土地であれば、全ての土地を国に引き渡すことができますか？", "費用はどのくらいかかりますか？", "Ⅹ社の提案により処分する場合、どのようなアドバイスをしますか？", "FP業務では、色々な専門職業家と連携することもあると思いますが、\n今回のケースで関与する、専門職業家には、どのような方々がいますか？"], "model": "①Aさんから直接聞いて確認する情報は、丙土地の状況（建物は立っていないか、担保権や使用収益権が設定されていないか、隣接する土地の所有者等との関係は良好か）\n長男Cさんの年収や資産状況。\n将来のライフプラン。\n賃貸マンションの入居者との関係は良好か。\n入居年数は何年ぐらいかを確認します。\n\n---\n\n②FP自身が調べて確認する情報は、⑴現地確認として、主に丙土地について、境界は明らかか、土壌汚染されていないか、勾配、工作物、車両、樹木などの物理的状況を、実際に現地で確認すること。\n\n⑵権利関係として\n　法務局で登記事項証明書や公図を請求し、土地の権利状況等を確認すること。\n\n⑶法令上の制限として\n　自治体の都市計画課等で、用途地域・都市計画等を確認し、今後の開発予定や周辺環境の変化などを把握すること。\n\n⑷市場調査として\n　Ｘ社の取引事例や財務状況を確認すること。\n　周辺の取引事例を、地元の不動産業者等で確認し、Ｘ社の提案は妥当かを確認します。\n\n---\n\n妥当だと思います。\n学費支援だけでなく、Ａさんの所有している賃貸マンションを長男Ｃさんに贈与すれば、家賃収入をＣさんに移転させることができ、所得税や相続税を軽減できる場合があります。\n\n---\n\n建物の贈与には、贈与税のほかに登記費用や不動産取得税もかかるため、注意が必要です。\nさらに、贈与する際の建物の評価額には固定資産税評価額を用いますが、賃貸マンションの場合、敷金などの負担すべき債務を付けたまま贈与すると、負担付贈与となり固定資産税評価額を利用した贈与ができなくなってしまい建物は時価で評価しなければなりません。\n\n---\n\n負担付贈与を回避するために、敷金に対応する金額も同時に贈与しておくと、敷金返還債務を引き継いでも負担付贈与には該当しなくなります。\n\n---\n\nＡさんが賃貸マンションの建物と土地の両方所有したまま相続が発生した場合、賃貸マンションの土地は貸家建付地として評価減ができます。\n\nＣさんに賃貸マンションの建物のみを贈与すると、土地の所有者はＡさん、建物の所有者はＣさんとなり、土地と建物の所有者が異なります。\nその際、地代の授受は行わず、無償で子が親の土地を利用する使用貸借となり、賃貸マンションの土地は相続時に自用地として評価されることになり土地の評価額が増加します。\n\n---\n\n賃貸マンションの建物を贈与後も、賃借人に変動がない場合には、貸家建付地の評価減を認めるという例外があります。\n\nマンション入居者の状況を確認すること。\n専門家と連携し、教育資金の一括贈与を検討することや、賃貸マンションの建物を贈与した場合の税負担と、Ａさんの相続税額の負担とをシミュレーションし、トータルで負担が少なくなるような計画を検討するように提案します。\n\n---\n\n個人的に丙土地を利用したい人がいないか、心当たりがないか確認します。\nまた、Ａさんは自分の代で解消したいと思っているが、相続土地国庫帰属制度が利用できないか法務局などに確認します。\n\n---\n\n相続した土地であっても、\n建物がある土地。\n担保権や使用収益権が設定されている土地。\n他人の利用が予定されている土地。\n特定の有害物質によって土壌汚染されている土地。\n境界が明らかでない土地・所有権の存否や範囲について争いがある土地は引き取りの対象外です。\n\n---\n\n申請する際に、1筆の土地当たり1万4000円の審査手数料を納付する必要があります。\n\n法務局による審査を経て承認されると、土地の性質に応じた標準的な管理費用を考慮して算出した10年分の土地管理費相当額の負担金を納付します。\n負担金は、1筆ごとに20万円が基本ですが、一部の市街地の宅地、農用地区域内の農地、森林などについては、面積に応じて負担金を算定します。\n\n---\n\n取引の安全性について、引取料を支払う前に所有権移転登記が行われたことを確認すること。\n引取料以外の費用や条件など、具体的な契約内容の確認をすること。\n適正価格で取引されているのかどうか、宅建業者等へ相談するなど、売却を含む様々な取引形態の比較検討をすること。\n引取後の不動産は適正に管理されるのか、引取後の土地の管理方針を確認するようにアドバイスします。\n\n---\n\n不動産の取引に関する、課税上の具体的な税務相談は、税理士に、\n売買契約等における、宅地建物取引業法に規定する業務については、宅地建物取引士に、\n土地の所有権移転登記については、司法書士に、\n正確な測量と境界の明示、登記については土地家屋調査士に、\n測量に基づく適正な不動産価格の算定は不動産鑑定士と連携します。"}]}, {"id": "2025-10-04-part1", "title": "2025年度第2回 Part1（2025年10月4日）", "setsurei": "　Ａさん（70歳）は、個人で不動産賃貸業を営んでおり、賃貸マンションと月極駐車場から年間600万円の収入を得ている。金融資産も潤沢にあることから、生活は安定している。\n\n　Ａさんには離婚歴があり、前妻との間に子Ｃさん（40歳）がいる。また、18年前に再婚した妻Ｂさん（62歳）にも離婚歴があり、前夫との間の子であるＤさん（38歳）がいる。再婚時にＤさんは既に成人し、結婚していたこともあり、ＡさんはＤさんと養子縁組をしていない。Ａさんは、自宅を10年前に二世帯住宅（区分所有登記はされていない）に建て替え、現在は妻ＢさんおよびＤさん家族と同居している。なお、ＡさんとＤさん家族は生計を別にしている。\n\n　ＡさんとＤさんの関係は良好であり、ＡさんはＤさんの子にも愛情を注いでいる。一方、前妻との間の実子である子Ｃさんは、妻Ｂさんとの折り合いが悪く、最近はほとんどＡさん宅に顔を見せることはない。\n\n　Ａさんは最近大病をしたこともあり、そろそろ相続の準備を始め、必要に応じて何らかの対策を講じておきたいと考えている。Ａさんは実の娘のように思っているＤさんに多くの財産を残したいと考えているが、Ｄさんには法的な相続権がないことから、どのように財産を相続させればよいかわからない。Ｄさんも、Ａさんや妻Ｂさんに万一のことがあった場合、自分や家族がこれからも現在の自宅に住み続けることができるのかどうか、不安に思っている。\n\n　また、Ａさんは、当面の相続対策として、毎年Ｄさんに110万円の暦年課税による現金の贈与を行うつもりであるが、何か問題がないか知りたいと思っている。\n\n【Ａさんの家族構成】\n妻Ｂさん（62歳）：専業主婦。自宅でＡさんと同居している。\n子Ｃさん（40歳）：会社員。夫と２人で賃貸マンションに住んでいる。\nＤさん（38歳）：専業主婦。夫と子の３人でＡさん所有の二世帯住宅に住んでいる。\n\n【Ａさんの所有財産の概要】（相続税評価額、土地は小規模宅地等の評価減適用前）\n\n⒈ 現預金 ： 6,000万円\n⒉ 有価証券 ： 2,000万円\n⒊ 自宅\n　①土地(330㎡) ： 8,000万円\n　②建物(築10年) ： 3,000万円\n⒋ 賃貸アパート(一戸) ： 3,000万円（年間賃料収入200万円）\n⒌ 月極駐車場(500m²) ： 3,000万円（年間賃料収入400万円）\n　合計 ： 2億5,000万円\n\n※月極駐車場は、アスファルトや砂利を敷いておらず、更地にロープを張っただけのいわゆる青空駐車場である。\n※Ａさんの相続に係る相続税額は、約4,900万円（配偶者の税額軽減・小規模宅地等の評価減適用前）と見積もられている。\n※Ａさんは、契約者（＝保険料負担者）・被保険者をＡさん、死亡保険金受取人を妻Ｂさんとする生命保険（死亡保険金1,000万円）に加入している。\n\n（注）設例に関し、詳細な計算を行う必要はない。", "questions": [{"main": "設例をじっくり読んだと思いますが、Aさんの相談内容と問題点について項目だけで構いませんので全てあげてください。", "followups": ["それでは、今あげた問題点を解決するためにどのような提案・方策が考えられますか？", "法的な相続権がないＤさんに財産を遺す方法は、どのような方法が考えられますか？", "養子縁組をする方法について説明してください。", "普通養子縁組の主な要件を教えてください。", "遺言書を作成してＤさんに遺贈する方法について説明してください。", "注意する点はありますか？", "Ｄさんに生前贈与をする方法を教えてください。", "毎年Ｄさんに110万円の暦年課税による現金の贈与を行うつもりですが、何か問題はありませんか？", "定期贈与とみなされず生前贈与を行うためには、どのような方法がありますか？", "Ａさんや妻Ｂさんに万一のことがあった場合、Ｄさんや家族がこれからも現在の自宅に住み続けることはできますか？", "Ａさんは、契約者（＝保険料負担者）・被保険者をＡさん、死亡保険金受取人を妻Ｂさんとする生命保険（死亡保険金1,000万円）に加入しています。\n妻Ｂさんが先に亡くなった場合は受取人をＤさんにすることは可能でしょうか？", "最後に、FPが守るべき職業倫理を６つあげてください。", "どれもFPにとっては大事なことだと思いますが、今回のケースでは特にどれを重視しますか？"], "model": "相談内容として\n\n・相続対策を考えていること。\n・法的な相続権がないＤさんにどのように財産を相続させればよいか。\n・Ａさんや妻Ｂさんに万一のことがあった場合、Ｄさんや家族がこれからも現在の自宅に住み続けることができるのかどうか。\n・毎年Ｄさんに110万円の暦年課税による現金の贈与を行うつもりであるが、何か問題がないか知りたいと思っていることです。\n\n問題点は、\n\n・相続税が高額になるので相続税の軽減。\n・納税資金の確保。\n・円滑な遺産分割の対策が必要です。\n\n---\n\n法的な相続権がないＤさんに財産を遺す方法は、\nＤさんと養子縁組をする方法。\n遺言書を作成してＤさんに遺贈する方法。\nＤさんに生前贈与をする方法の３つがあります。\n\n---\n\n養子縁組とは、血縁関係にない者同士の間に、法律上の親子関係を作る制度のことです。\n養子縁組を結ぶと、Ｄさんとの間で法律上の親子関係が成立します。\n養子縁組を結び法律上の親子関係が成立すれば、養子になったＤさんも法定相続人となります。\nそのためＡさんが亡くなったときは、血縁関係のあるＣさん同様、Ｄさんにも法的な相続権が認められます。\n\n---\n\n養親は20歳以上であること。\n養子縁組をするには、養親本人と養子本人の合意が必要なこと。養子が15歳未満の場合には、養子の法定代理人が、養子本人に代わって養子縁組の合意をします。\n養親又は養子に配偶者がいる場合には、原則として、その配偶者の同意が必要です。\n\n---\n\n遺言書を作成するとは、財産をＤさんに遺贈するという内容の遺言を残しておく方法です。\n\n---\n\n作成する際は、Ｃさんの遺留分を侵害しないように注意が必要です。\n遺言書でＤさんに多くの財産を遺そうとして遺留分を侵害すると、Ｃさんから遺留分侵害額請求を受ける可能性があります。\nまた、作成方法のミスや遺留分への配慮不足から、後でトラブルになる可能性があるため、公正証書遺言の作成や専門家へ相談するようにアドバイスします。\n\n遺贈によって相続権のないＤさんに対し財産を引き継いだ場合、相続税が２割加算されます。\nまた、場合によっては債務や連帯保証人の立場といったマイナスの財産も引き継がなければならない点や、法定相続人以外に不動産を引き継ぐ場合、不動産取得税がかかる点には注意が必要です。\n\n---\n\nＡさんの生前に双方で贈与契約を結び、財産を贈与する方法です。\n生前贈与をするとＡさんが亡くなる前に、法定相続人ではないＤさんにも財産を引き継ぐことができます。\n\n---\n\n贈与税には基礎控除があるため、年間110万円までであれば無税で贈与できます。しかし、定期贈与とみなされてしまうと贈与税の対象になるため注意が必要です。\n\n---\n\n贈与をする度に贈与契約書を作成しておくこと。\n基礎控除を少し超える額の贈与を行い、贈与税の申告を行うこと。\n毎年、同じ時期に同じ金額を贈与するのではなく、時期や金額を変えて行う方法があります。\n\n---\n\nＡさんが先に亡くなり、妻Ｂさんが自宅の所有権を相続した場合、Ｂさんが将来亡くなると、Ｄさんに自宅の所有権は相続され、現在の自宅に住み続けることはできます。\n\nただし、現状のままだと、妻Ｂさんが自宅の所有権をスムーズに相続できるとは限らないので、Ｄさんとの養子縁組や遺言書を作成することをアドバイスします。\n\n---\n\nＤさんを受取人にするには、養子縁組をすることが確実な方法ですが、養子縁組をしていない場合でも、保険会社によっては認められることがあります。\nまた、養子縁組をせずにＤさんが保険金を受け取る場合、相続税の非課税枠が適用されないなどの相続税上の注意点があります。\n\n---\n\n顧客利益の優先、守秘義務の遵守、顧客に対する説明義務、インフォームドコンセント、コンプライアンスの徹底、FP自身の能力の啓発です。\n\n---\n\n今回のケースでは、インフォームドコンセントを重視します。\n\nＡさんと妻Ｂさんは再婚同士でそれぞれに子供もいます。\nしかし、前妻との間の実子である子Ｃさんは、妻Ｂさんとの折り合いが悪く、最近はほとんどＡさん宅に顔を見せることはないということです。\n相続手続きが複雑になることも考えられるので、一つ一つ制度の内容や適用効果を説明することだけでなく、ご家族と一緒に理解状況を確認しながら、寄り添ったわかりやすく丁寧な説明を行い、必ず同意を得て提案することを重視します。"}]}]};
+
+const LAST_Q = {
+  part1: "FP業務では、色々な専門職業家と連携することもあると思いますが、今回のケースで関与する、専門職業家には、どのような方々がいますか？",
+  part2: "最後に、FPが守るべき職業倫理を６つあげてください。"
+};
+
+// ===== STATE =====
+let S = {
+  mode:'part', part:1, selectedExam:null,
+  voiceGender:'f', rate:1.0,
+  timerInterval:null, secs:720,
+  qIdx:0, fqIdx:-1,
+  currentQ:'', qaLog:[],
+  recognition:null, micAvail:false, recording:false,
+  transcript:'', silenceTimer:null,
+  speaking:false, utterance:null,
+  lastQDone:false
+};
+
+// ===== INIT =====
+function init(){
+  buildExamList();
+  document.getElementById('rate-slider').oninput = e => {
+    S.rate = parseFloat(e.target.value);
+    document.getElementById('rate-val').textContent = S.rate.toFixed(2);
+  };
+}
+
+function buildExamList(){
+  const list = document.getElementById('exam-list');
+  list.innerHTML = '';
+  EXAM_DATA.exams.forEach(e => {
+    const d = document.createElement('div');
+    d.className = 'exam-item';
+    const part = e.id.includes('part1') ? 'Part1' : 'Part2';
+    d.innerHTML = `<span class="badge2">${part}</span>${e.title}`;
+    d.onclick = function(){ selectExam(e.id, this); };
+    list.appendChild(d);
+  });
+}
+
+// ===== TOP SCREEN LOGIC =====
+function setMode(m){
+  S.mode = m;
+  ['part','direct','random','keyword'].forEach(x => {
+    document.getElementById('mode-'+x).classList.toggle('active', x===m);
+    document.getElementById('opt-'+x).style.display = x===m ? 'block' : 'none';
+  });
+  if(m==='random'){ S.selectedExam = null; updateStartBtn(true); showSelectedInfo(null); }
+  else if(m==='part'){ S.selectedExam = null; updateStartBtn(true); showSelectedInfo(null); }
+  else { updateStartBtn(false); }
+}
+
+function setPart(p){
+  S.part = p;
+  document.getElementById('part-1').classList.toggle('active', p===1);
+  document.getElementById('part-2').classList.toggle('active', p===2);
+}
+
+function selectExam(id, el){
+  S.selectedExam = EXAM_DATA.exams.find(e => e.id === id);
+  document.querySelectorAll('.exam-item').forEach(e => e.style.background = '');
+  if(el) el.style.background = 'rgba(184,150,90,.1)';
+  showSelectedInfo(S.selectedExam);
+  updateStartBtn(true);
+}
+
+function showSelectedInfo(exam){
+  const el = document.getElementById('selected-info');
+  if(exam){ el.textContent = '選択中：' + exam.title; el.style.display = 'block'; }
+  else { el.style.display = 'none'; }
+}
+
+function searchKeyword(){
+  const kw = document.getElementById('keyword-input').value.trim();
+  const res = document.getElementById('keyword-results');
+  res.innerHTML = '';
+  S.selectedExam = null; updateStartBtn(false);
+  if(!kw) return;
+  const hits = EXAM_DATA.exams.filter(e =>
+    e.setsurei.includes(kw) || e.title.includes(kw) ||
+    e.questions.some(q => q.model.includes(kw) || q.main.includes(kw))
+  );
+  if(!hits.length){ res.innerHTML = '<div style="padding:10px;font-size:13px;color:var(--muted)">該当なし</div>'; return; }
+  // ランダムに1つ選択して表示
+  const pick = hits[Math.floor(Math.random()*hits.length)];
+  const d = document.createElement('div');
+  d.className = 'exam-item';
+  d.innerHTML = `<span class="badge2">${pick.id.includes('part1')?'Part1':'Part2'}</span>${pick.title}`;
+  d.onclick = function(){ selectExam(pick.id, this); };
+  res.appendChild(d);
+  if(hits.length > 1){
+    const note = document.createElement('div');
+    note.style.cssText = 'padding:8px 14px;font-size:12px;color:var(--muted)';
+    note.textContent = `他${hits.length-1}件ヒット（ランダムで1件表示）`;
+    res.appendChild(note);
+  }
+}
+
+function toggleExtra(){
+  S.extraQ = !S.extraQ;
+  document.getElementById('toggle-extra').classList.toggle('on', S.extraQ);
+}
+
+function setVoiceGender(g){
+  S.voiceGender = g;
+  document.getElementById('voice-m').classList.toggle('active', g==='m');
+  document.getElementById('voice-f').classList.toggle('active', g==='f');
+}
+function setVoiceGenderLive(g){
+  S.voiceGender = g;
+  document.getElementById('iv-voice-m').classList.toggle('active', g==='m');
+  document.getElementById('iv-voice-f').classList.toggle('active', g==='f');
+  document.getElementById('voice-m').classList.toggle('active', g==='m');
+  document.getElementById('voice-f').classList.toggle('active', g==='f');
+}
+function setRateLive(v){
+  S.rate = parseFloat(v);
+  document.getElementById('iv-rate-val').textContent = parseFloat(v).toFixed(2);
+  document.getElementById('rate-val').textContent = parseFloat(v).toFixed(2);
+}
+
+function updateStartBtn(ok){
+  document.getElementById('start-btn').disabled = !ok;
+}
+
+// ===== SPEECH SYNTHESIS =====
+const synth = window.speechSynthesis;
+let voices = [];
+function loadVoices(){ voices = synth.getVoices(); }
+if(synth.onvoiceschanged !== undefined) synth.onvoiceschanged = loadVoices;
+loadVoices();
+
+function speak(text, onEnd){
+  synth.cancel();
+  const doSpeak = () => {
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'ja-JP';
+    u.rate = S.rate;
+    const jaVoices = synth.getVoices().filter(v => v.lang && v.lang.startsWith('ja'));
+    if(jaVoices.length){
+      let pick;
+      if(S.voiceGender === 'f'){
+        // iOS: Kyoko, Android: Google日本語（女性）
+        pick = jaVoices.find(v => /kyoko/i.test(v.name))
+          || jaVoices.find(v => /female/i.test(v.name))
+          || jaVoices.find(v => !/otoya|male/i.test(v.name))
+          || jaVoices[jaVoices.length - 1];
+        u.pitch = 1.2;
+      } else {
+        pick = jaVoices.find(v => /otoya/i.test(v.name))
+          || jaVoices.find(v => /male/i.test(v.name))
+          || jaVoices[0];
+        u.pitch = 0.8;
+      }
+      u.voice = pick;
+    }
+    S.utterance = u;
+    document.getElementById('speaking-dots').style.display = 'flex';
+    let endFired = false;
+    const endOnce = () => {
+      if(endFired) return;
+      endFired = true;
+      document.getElementById('speaking-dots').style.display = 'none';
+      if(onEnd) onEnd();
+    };
+    // 音声長さに応じたタイムアウト（最大30秒）
+    const timeout = setTimeout(endOnce, Math.max(3000, text.length * 200));
+    u.onend = () => { clearTimeout(timeout); endOnce(); };
+    u.onerror = () => { clearTimeout(timeout); endOnce(); };
+    synth.speak(u);
+    S.speaking = true;
+  };
+  // 音声リストが未ロードの場合は待つ（タイムアウト付き）
+  if(synth.getVoices().length > 0){
+    doSpeak();
+  } else {
+    let fired = false;
+    const fallback = setTimeout(() => {
+      if(!fired){ fired = true; doSpeak(); }
+    }, 500);
+    synth.onvoiceschanged = () => {
+      if(!fired){ fired = true; clearTimeout(fallback); synth.onvoiceschanged = null; doSpeak(); }
+    };
+  }
+}
+
+// ===== MIC =====
+function initMic(){
+  const has = 'webkitSpeechRecognition' in window || 'SpeechRecognition' in window;
+  if(!has){ S.micAvail = false; document.getElementById('mic-status').textContent = 'このブラウザは音声非対応'; return; }
+  S.micAvail = true;
+}
+
+function createRecognition(){
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const r = new SR();
+  r.lang = 'ja-JP';
+  r.continuous = false;  // 1発話ごとに完結
+  r.interimResults = true;
+  r.onresult = e => {
+    let final = '';
+    let interim = '';
+    for(let i = 0; i < e.results.length; i++){
+      if(e.results[i].isFinal) final += e.results[i][0].transcript;
+      else interim += e.results[i][0].transcript;
+    }
+    if(final) S.transcript += final;
+    const display = S.transcript + interim;
+    document.getElementById('transcript').textContent = display || '（認識中...）';
+    document.getElementById('text-input').value = display;
+  };
+  r.onerror = e => {
+    if(e.error === 'no-speech' || e.error === 'aborted') return;
+    stopMic();
+  };
+  r.onend = () => {
+    // 録音中なら新しいインスタンスで再開（Androidの制限対応）
+    if(S.recording){
+      S.recognition = createRecognition();
+      try{ S.recognition.start(); } catch(err){}
+    }
+  };
+  return r;
+}
+
+function toggleMic(){
+  if(!S.micAvail){
+    document.getElementById('mic-status').textContent = '音声認識非対応ブラウザです';
+    return;
+  }
+  if(S.recording){ stopMic(); }
+  else { startMic(); }
+}
+
+function startMic(){
+  S.transcript='';
+  document.getElementById('transcript').textContent='（認識中...）';
+  document.getElementById('text-input').value='';
+  S.recording=true;
+  S.recognition = createRecognition();
+  try{ S.recognition.start(); } catch(err){ stopMic(); return; }
+  document.getElementById('mic-btn').classList.add('rec');
+  document.getElementById('mic-btn').textContent='⏹';
+  document.getElementById('mic-status').textContent='録音中...';
+  document.getElementById('mic-done-btn').style.display='inline-block';
+}
+
+function stopMic(){
+  S.recording=false;
+  clearTimeout(S.silenceTimer);
+  try{S.recognition.stop();}catch(e){}
+  document.getElementById('mic-btn').classList.remove('rec');
+  document.getElementById('mic-btn').textContent='🎤';
+  document.getElementById('mic-status').textContent='タップして録音開始';
+  const btn=document.getElementById('mic-done-btn');
+  if(btn)btn.style.display='none';
+}
+
+function resetSilenceTimer(){
+  // 沈黙タイマー無効化（発言終了ボタンで送信）
+}
+function micDone(){stopMic();submitAnswer();}
+
+// ===== INTERVIEW FLOW =====
+function startInterview(){
+  // 問題選択
+  let exam;
+  if(S.mode === 'random'){
+    exam = EXAM_DATA.exams[Math.floor(Math.random()*EXAM_DATA.exams.length)];
+  } else if(S.mode === 'part'){
+    const filtered = EXAM_DATA.exams.filter(e => e.id.includes('part'+S.part));
+    exam = filtered[Math.floor(Math.random()*filtered.length)];
+  } else {
+    exam = S.selectedExam;
+  }
+  if(!exam) return;
+  S.selectedExam = exam;
+  S.qIdx = 0; S.fqIdx = -1; S.qaLog = []; S.lastQDone = false;
+  S.transcript = ''; S.currentQ = '';
+
+  showScreen('interview');
+  initMic();
+  buildProgress();
+  startTimer();
+
+  // 挨拶待ち
+  showQuestion('よろしくお願いします。まず自己紹介をお願いします。', true);
+}
+
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-'+id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function buildProgress(){
+  const exam = S.selectedExam;
+  const total = exam.questions[0].followups.length + 1;
+  const el = document.getElementById('progress');
+  el.innerHTML = '';
+  for(let i=0;i<Math.min(total,8);i++){
+    const d = document.createElement('div');
+    d.className = 'prog-dot' + (i===0?' curr':'');
+    d.id = 'pd-'+i;
+    el.appendChild(d);
+  }
+}
+
+function updateProgress(idx){
+  document.querySelectorAll('.prog-dot').forEach((d,i) => {
+    d.className = 'prog-dot' + (i<idx?' done':i===idx?' curr':'');
+  });
+}
+
+function startTimer(){
+  S.secs = 720;
+  S.timerInterval = setInterval(() => {
+    S.secs--;
+    const m = Math.floor(S.secs/60);
+    const s = S.secs%60;
+    const t = document.getElementById('timer');
+    const f = document.getElementById('timer-fill');
+    t.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    f.style.width = (S.secs/720*100)+'%';
+    if(S.secs <= 120){ t.classList.add('urgent'); f.classList.add('urgent'); }
+    // 11分30秒 = 30秒経過
+    if(S.secs <= 30 && !S.lastQDone){ forceLastQ(); }
+    if(S.secs <= 0){ clearInterval(S.timerInterval); endInterview(); }
+  }, 1000);
+}
+
+function forceLastQ(){
+  S.lastQDone = true;
+  const isP1 = S.selectedExam.id.includes('part1');
+  const lastQ = isP1 ? LAST_Q.part1 : LAST_Q.part2;
+  // 既に最後の質問が終わっていれば何もしない
+  if(S.qaLog.some(l => l.q === lastQ)) return;
+  showQuestion(lastQ);
+}
+
+function showQuestion(text, isGreeting=false){
+  S.currentQ = text;
+  document.getElementById('q-text').textContent = text;
+  // 音声モードのみ読み上げ中ドットを表示
+  document.getElementById('speaking-dots').style.display = 'none';
+  document.getElementById('answer-area').style.display = 'none';
+  document.getElementById('thinking').style.display = 'none';
+  if(document.getElementById('text-input')) document.getElementById('text-input').value = '';
+  document.getElementById('transcript').textContent = '（ここに音声認識の内容が表示されます）';
+  S.transcript = '';
+
+  speak(text, () => {
+    document.getElementById('answer-area').style.display = 'block';
+    window.scrollTo({top: document.getElementById('q-block').offsetTop - 70, behavior:'smooth'});
+
+  });
+}
+
+function addHistory(q, a){
+  const h = document.getElementById('history');
+  const div = document.createElement('div');
+  div.innerHTML = `<div class="hist-q">${q}</div><div class="hist-a">${a||'（回答なし）'}</div>`;
+  h.appendChild(div);
+  // 過去ログは下に追加するだけ（スクロールはしない）
+}
+
+function submitAnswer(){
+  const answer = document.getElementById('text-input').value.trim() || S.transcript.trim() || '（回答なし）';
+  stopMic();
+  clearTimeout(S.silenceTimer);
+  S.qaLog.push({q:S.currentQ, a:answer});
+  addHistory(S.currentQ, answer);
+  document.getElementById('answer-area').style.display = 'none';
+  nextQuestion();
+}
+
+function generateExtraQ(){
+  endInterview();
+}
+
+function nextQuestion(){
+  const exam = S.selectedExam;
+  const allFollowups = exam.questions[0].followups;
+  const remainSecs = S.secs;
+
+  if(remainSecs <= 30 && !S.lastQDone){
+    forceLastQ();
+    return;
+  }
+
+  // fqIdx=-1: mainの質問をまだ聞いていない → mainを表示
+  if(S.fqIdx < 0){
+    S.fqIdx = 0;
+    updateProgress(0);
+    showQuestion(exam.questions[0].main);
+    return;
+  }
+
+  // fqIdx>=0: followupsを順番に
+  if(S.fqIdx < allFollowups.length){
+    const nextQ = allFollowups[S.fqIdx];
+    S.fqIdx++;
+    updateProgress(S.fqIdx);
+    showQuestion(nextQ);
+  } else {
+    // 全部終わった
+      endInterview();
+  }
+}
+
+function repeatQuestion(){
+  document.getElementById('answer-area').style.display = 'none';
+  document.getElementById('text-input').value = '';
+  document.getElementById('transcript').textContent = '（ここに音声認識の内容が表示されます）';
+  S.transcript = '';
+  stopMic();
+  speak(S.currentQ, () => {
+    document.getElementById('answer-area').style.display = 'block';
+  });
+}
+
+function skipAnswer(){
+  stopMic();
+  clearTimeout(S.silenceTimer);
+  document.getElementById('text-input').value = '';
+  S.transcript = '';
+  submitAnswer();
+}
+
+function endInterview(){
+  clearInterval(S.timerInterval);
+  stopMic();
+  const closing = "質問は以上です。お疲れさまでした。ありがとうございました。";
+  document.getElementById('q-text').textContent = closing;
+  document.getElementById('answer-area').style.display = 'none';
+  document.getElementById('thinking').style.display = 'none';
+  speak(closing, () => {
+    setTimeout(()=>showFeedback(), 1500);
+  });
+}
+
+// ===== FEEDBACK =====
+function showFeedback(){
+  showScreen('feedback');
+  const exam = S.selectedExam;
+  document.getElementById('fb-title').textContent = exam.title;
+  document.getElementById('fb-sub').textContent = `質疑応答 ${S.qaLog.length}回`;
+
+  const logEl = document.getElementById('qa-log');
+  S.qaLog.forEach(item => {
+    const d = document.createElement('div');
+    d.className = 'qa-item';
+    d.innerHTML = `<div class="qa-q">Q: ${item.q}</div><div class="qa-a">A: ${item.a||'（回答なし）'}</div>`;
+    logEl.appendChild(d);
+  });
+}
+
+function copyFeedbackText(){
+  var exam = S.selectedExam;
+  var qaText = S.qaLog.map(function(l,i){
+    return '【質問'+(i+1)+'】'+l.q+'\n【回答'+(i+1)+'】'+(l.a||'（回答なし）');
+  }).join('\n\n');
+  var text = '以下はFP1級実技試験（'+exam.title+'）の模擬面接のやり取りです。模範解答と私の回答を比較して、質問ごとに相違点・不足点・誤りを指摘してください。採点や合否判定は不要です。\n\n■ 模範解答\n'+exam.questions[0].model+'\n\n■ 私の面接でのやり取り\n'+qaText;
+  navigator.clipboard.writeText(text).then(function(){
+    document.getElementById('copy-done').style.display='block';
+    document.getElementById('copy-btn').textContent='✅ コピー済み';
+  }).catch(function(){
+    var ta=document.createElement('textarea');
+    ta.value=text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    document.getElementById('copy-done').style.display='block';
+    document.getElementById('copy-btn').textContent='✅ コピー済み';
+  });
+}
+
+function confirmAbort(){
+  if(confirm('面接を中止してトップ画面に戻りますか？')){
+    clearInterval(S.timerInterval);
+    stopMic();
+    synth.cancel();
+    document.getElementById('history').innerHTML='';
+    showScreen('top');
+  }
+}
+function confirmRestart(){
+  if(confirm('最初からやり直しますか？')) restart();
+}
+function restart(){
+  clearInterval(S.timerInterval);
+  stopMic();
+  synth.cancel();
+  S = {...S, qIdx:0,fqIdx:-1,qaLog:[],lastQDone:false,transcript:'',currentQ:'',recording:false};
+  document.getElementById('history').innerHTML = '';
+  document.getElementById('qa-log').innerHTML = '';
+  
+  
+  showScreen('top');
+}
+
+if(document.readyState === 'loading'){
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
 </script>
+</body>
+</html>
