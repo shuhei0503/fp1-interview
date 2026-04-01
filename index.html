@@ -251,6 +251,11 @@ textarea:focus{border-color:var(--accent)}
   </div>
 
   <div class="fb-section">
+    <div class="fb-section-title">面接のやり取り</div>
+    <div id="qa-text-output" style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:14px;font-size:12px;line-height:1.9;white-space:pre-wrap;word-break:break-all;max-height:300px;overflow-y:auto;color:var(--text)"></div>
+  </div>
+
+  <div class="fb-section">
     <div class="fb-section-title">CLAUDE へのフィードバック依頼</div>
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;">
       <p style="font-size:13px;color:var(--dim);line-height:1.8;margin-bottom:16px">以下のボタンを押してコピーし、Claudeのチャットに貼り付けてください。<br>模範解答との相違点・過不足をフィードバックしてもらえます。</p>
@@ -302,7 +307,16 @@ function init(){
 function buildExamList(){
   const list = document.getElementById('exam-list');
   list.innerHTML = '';
-  EXAM_DATA.exams.forEach(e => {
+  // 年月日降順・同一日はpart1→part2の順にソート
+  const sorted = [...EXAM_DATA.exams].sort((a, b) => {
+    const dateA = a.id.replace(/-part[12]$/, '');
+    const dateB = b.id.replace(/-part[12]$/, '');
+    if(dateA !== dateB) return dateB.localeCompare(dateA); // 日付降順
+    const pA = a.id.includes('part1') ? 0 : 1;
+    const pB = b.id.includes('part1') ? 0 : 1;
+    return pA - pB; // part1→part2
+  });
+  sorted.forEach(e => {
     const d = document.createElement('div');
     d.className = 'exam-item';
     const part = e.id.includes('part1') ? 'Part1' : 'Part2';
@@ -719,6 +733,15 @@ function showFeedback(){
   const exam = S.selectedExam;
   document.getElementById('fb-title').textContent = exam.title;
   document.getElementById('fb-sub').textContent = `質疑応答 ${S.qaLog.length}回`;
+
+  // 面接のやり取りをテキストで出力
+  const qaTextOutput = document.getElementById('qa-text-output');
+  if(qaTextOutput){
+    const lines = S.qaLog.map((item, i) =>
+      '【質問'+(i+1)+'】'+item.q+'\n【回答'+(i+1)+'】'+(item.a||'（回答なし）')
+    ).join('\n\n');
+    qaTextOutput.textContent = lines;
+  }
 
   const logEl = document.getElementById('qa-log');
   S.qaLog.forEach(item => {
