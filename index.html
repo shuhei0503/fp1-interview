@@ -612,8 +612,7 @@ function startTimer(){
     f.style.width = (S.secs/720*100)+'%';
     if(S.secs <= 120){ t.classList.add('urgent'); f.classList.add('urgent'); }
     // 11分30秒 = 30秒経過
-    if(S.secs <= 30 && !S.lastQDone){ forceLastQ(); }
-    if(S.secs <= 0){ clearInterval(S.timerInterval); endInterview(); }
+    // タイマーは参考表示のみ（時間切れでも面接は継続）
   }, 1000);
 }
 
@@ -669,12 +668,6 @@ function generateExtraQ(){
 function nextQuestion(){
   const exam = S.selectedExam;
   const allFollowups = exam.questions[0].followups;
-  const remainSecs = S.secs;
-
-  if(remainSecs <= 30 && !S.lastQDone){
-    forceLastQ();
-    return;
-  }
 
   // fqIdx=-1: mainの質問をまだ聞いていない → mainを表示
   if(S.fqIdx < 0){
@@ -684,7 +677,7 @@ function nextQuestion(){
     return;
   }
 
-  // fqIdx>=0: followupsを順番に
+  // fqIdx>=0: followupsを順番に（時間に関係なく全問やりきる）
   if(S.fqIdx < allFollowups.length){
     const nextQ = allFollowups[S.fqIdx];
     S.fqIdx++;
@@ -692,7 +685,7 @@ function nextQuestion(){
     showQuestion(nextQ);
   } else {
     // 全部終わった
-      endInterview();
+    endInterview();
   }
 }
 
