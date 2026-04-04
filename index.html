@@ -747,7 +747,7 @@ function showFeedback(){
 
 function copyFeedbackText(){
   var exam = S.selectedExam;
-  var modelParts = exam.questions[0].model.split('\n---\n');
+  var modelParts = exam.questions[0].model.split('\n\n---\n\n');
   var qaWithModel = S.qaLog.map(function(l,i){
     var modelPart = modelParts[i] ? modelParts[i].trim() : '（模範解答なし）';
     return '質問'+(i+1)+'：'+l.q+'\nあなたの回答：'+(l.a||'（回答なし）')+'\n模範解答：'+modelPart+'\n総評：';
