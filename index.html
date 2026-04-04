@@ -747,16 +747,12 @@ function showFeedback(){
 
 function copyFeedbackText(){
   var exam = S.selectedExam;
-  var qaText = S.qaLog.map(function(l,i){
-    return '質問'+(i+1)+'：'+l.q+'\nあなたの回答：'+(l.a||'（回答なし）')+'\n模範解答：[各質問の模範解答は下記参照]';
-  }).join('\n\n');
-  // 質問ごとに「質問文・あなたの回答・模範解答」を並べた形式で生成
   var modelParts = exam.questions[0].model.split('\n---\n');
   var qaWithModel = S.qaLog.map(function(l,i){
     var modelPart = modelParts[i] ? modelParts[i].trim() : '（模範解答なし）';
-    return '質問'+(i+1)+'：'+l.q+'\nあなたの回答：'+(l.a||'（回答なし）')+'\n模範解答：'+modelPart;
+    return '質問'+(i+1)+'：'+l.q+'\nあなたの回答：'+(l.a||'（回答なし）')+'\n模範解答：'+modelPart+'\n総評：';
   }).join('\n\n');
-  var text = '以下はFP1級実技試験（'+exam.title+'）の模擬面接のやり取りです。質問ごとに「あなたの回答」と「模範解答」を比較して、誤り箇所・不足点を指摘してください。採点や合否判定は不要です。\n\n'+qaWithModel;
+  var text = '以下はFP1級実技試験（'+exam.title+'）の模擬面接のやり取りです。\n各質問について、下記の形式のまま「総評：」の後に評価を記入してください。採点や合否判定は不要です。表形式への変換はしないでください。\n\n'+qaWithModel;
   navigator.clipboard.writeText(text).then(function(){
     document.getElementById('copy-done').style.display='block';
     document.getElementById('copy-btn').textContent='✅ コピー済み';
