@@ -747,17 +747,10 @@ function showFeedback(){
 
 function copyFeedbackText(){
   var exam = S.selectedExam;
-  // 面接のやり取り（質問＋あなたの回答）
   var qaText = S.qaLog.map(function(l,i){
-    return '質問'+(i+1)+'：'+l.q+'\nあなたの回答：'+(l.a||'（回答なし）')+'\n総評：';
+    return '【質問'+(i+1)+'】'+l.q+'\n【回答'+(i+1)+'】'+(l.a||'（回答なし）');
   }).join('\n\n');
-  // 模範解答（全文）
-  var modelText = exam.questions[0].model;
-  var text = '以下はFP1級実技試験（'+exam.title+'）の模擬面接のやり取りです。\n'
-    + '【模範解答】を参照しながら、各質問の「総評：」の後に評価を記入してください。\n'
-    + '採点や合否判定は不要です。表形式への変換はしないでください。\n\n'
-    + '■ 面接のやり取り\n\n' + qaText
-    + '\n\n■ 模範解答（全文）\n\n' + modelText;
+  var text = '以下はFP1級実技試験（'+exam.title+'）の模擬面接のやり取りです。模範解答と私の回答を比較して、質問ごとに相違点・不足点・誤りを指摘してください。採点や合否判定は不要です。\n\n■ 模範解答\n'+exam.questions[0].model+'\n\n■ 私の面接でのやり取り\n'+qaText;
   navigator.clipboard.writeText(text).then(function(){
     document.getElementById('copy-done').style.display='block';
     document.getElementById('copy-btn').textContent='✅ コピー済み';
